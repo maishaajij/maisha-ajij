@@ -91,7 +91,7 @@
             transition: transform 0.2s;
         }
 
-        /* 2. Hero Section & Dynamic Player Workspace */
+        /* 2. Hero Section & Player Workspace */
         .hero-section {
             margin-top: 80px;
             position: relative;
@@ -101,7 +101,6 @@
             display: flex;
             align-items: center;
             padding: 0 6%;
-            transition: all 0.5s ease;
         }
 
         .player-container {
@@ -144,6 +143,35 @@
             color: #aaaaaa;
             font-size: 0.95rem;
             line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Quality Controller inside Banner */
+        .quality-selector-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 8px;
+            width: max-content;
+        }
+
+        .quality-selector-box label {
+            font-size: 0.85rem;
+            color: #ff2a5f;
+            font-weight: 600;
+        }
+
+        .quality-selector-box select {
+            background: #13192e;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
         }
 
         /* 3. Search and Functional Filters Dashboard */
@@ -258,6 +286,7 @@
         .channel-category {
             font-size: 0.8rem;
             color: #777d93;
+            text-transform: capitalize;
         }
 
         .close-player {
@@ -274,7 +303,6 @@
             font-weight: 600;
         }
 
-        /* Not Found Message styling */
         .no-results {
             grid-column: 1 / -1;
             text-align: center;
@@ -316,11 +344,21 @@
             <div class="live-tag">● Live Now</div>
             <h1 class="hero-title" id="current-playing-title">FIFA World Cup Live</h1>
             <p class="hero-desc" id="current-playing-desc">Select a live channel from below to start streaming instantly with high definition resolution.</p>
+            
+            <!-- Quality Switching Backend Component -->
+            <div class="quality-selector-box" id="quality-box" style="display: none;">
+                <label for="video-quality">Quality:</label>
+                <select id="video-quality" onchange="changeQuality()">
+                    <option value="hd" selected>HD (Auto)</option>
+                    <option value="fullhd">Full HD (1080p)</option>
+                    <option value="sd">SD (360p/480p)</option>
+                </select>
+            </div>
         </div>
     </section>
 
     <main class="main-content">
-        <!-- 100% Functional Filter Dashboard -->
+        <!-- Search and Category Filters -->
         <div class="search-filter-bar">
             <div class="search-box">
                 <input type="text" id="search-input" onkeyup="filterChannels()" placeholder="Search channels by name...">
@@ -328,57 +366,75 @@
             <div class="filter-dropdowns">
                 <select id="category-filter" onchange="filterChannels()">
                     <option value="all">All Categories</option>
-                    <option value="news">News</option>
-                    <option value="entertainment">Entertainment</option>
                     <option value="sports">Sports</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="news">News</option>
                 </select>
             </div>
         </div>
 
         <h2 class="grid-title">Live Channels</h2>
         
-        <!-- Channels Dynamic Grid Area -->
         <div class="channels-grid" id="channels-grid-container">
-            
             <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
 
-            <!-- --------------------------------------------------------------------------------- -->
-            <!-- [চ্যানেল যোগ করার জায়গা] নিচে আপনার লিঙ্কগুলো এভাবে এক এক করে বসাবেন বা আমাকে দিন -->
-            <!-- --------------------------------------------------------------------------------- -->
-            
-            <!-- চ্যানেল ১ (News উদাহরণ) -->
-            <div class="channel-card" data-name="nhk world japan news" data-category="news" onclick="playStream('https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8', 'NHK World Japan', 'Category: News / International')">
+            <!-- 1. Somoy TV (Sports) -->
+            <div class="channel-card" data-name="somoy tv" data-category="sports" onclick="playStream('https://tvsen6.aynaott.com/somoytv/index.m3u8', 'Somoy TV', 'Category: Live Sports & News Pack')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600" alt="News Poster">
+                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600" alt="Sports Image">
                 </div>
                 <div class="channel-info">
-                    <div class="channel-name">NHK World Japan</div>
-                    <div class="channel-category">News</div>
+                    <div class="channel-name">Somoy TV</div>
+                    <div class="channel-category">Sports</div>
                 </div>
             </div>
 
-            <!-- চ্যানেল ২ (Entertainment উদাহরণ) -->
-            <div class="channel-card" data-name="demo movie hd premium" data-category="entertainment" onclick="playStream('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', 'Demo Movie HD', 'Category: Entertainment / Movies')">
+            <!-- 2. T Sports (Sports) -->
+            <div class="channel-card" data-name="t sports" data-category="sports" onclick="playStream('https://trs1.aynaott.com/tsports/index.m3u8', 'T Sports', 'Category: Live Sports / Cricket / Football')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600" alt="Entertainment Poster">
+                    <img src="https://images.unsplash.com/photo-1540747737956-37872ee754ad?q=80&w=600" alt="Sports Image">
                 </div>
                 <div class="channel-info">
-                    <div class="channel-name">Demo Movie HD</div>
+                    <div class="channel-name">T Sports</div>
+                    <div class="channel-category">Sports</div>
+                </div>
+            </div>
+
+            <!-- 3. CAZE TV (Sports) -->
+            <div class="channel-card" data-name="caze tv" data-category="sports" onclick="playStream('https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8', 'CAZE TV', 'Category: International Live Sports')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=600" alt="Sports Image">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">CAZE TV</div>
+                    <div class="channel-category">Sports</div>
+                </div>
+            </div>
+
+            <!-- 4. Colours TV (Entertainment) -->
+            <div class="channel-card" data-name="colours tv" data-category="entertainment" onclick="playStream('http://103.72.101.252:8080/live/1368.m3u8', 'Colours TV', 'Category: Entertainment & Serial Drama')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600" alt="Entertainment Image">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Colours TV</div>
                     <div class="channel-category">Entertainment</div>
                 </div>
             </div>
 
-            <!-- চ্যানেল ৩ (Sports উদাহরণ) -->
-            <div class="channel-card" data-name="test sports stream football" data-category="sports" onclick="playStream('https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8', 'Test Sports Stream', 'Category: Live Sports / Football')">
+            <!-- 5. NHK World Premium (News/Global HD) -->
+            <div class="channel-card" data-name="nhk world japan news" data-category="news" onclick="playStream('https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8', 'NHK World HD', 'Category: International News HD')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600" alt="Sports Poster">
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600" alt="News Image">
                 </div>
                 <div class="channel-info">
-                    <div class="channel-name">Test Sports Stream</div>
-                    <div class="channel-category">Sports</div>
+                    <div class="channel-name">NHK World HD</div>
+                    <div class="channel-category">News</div>
                 </div>
             </div>
 
@@ -392,8 +448,11 @@
 
     <script>
         var activePlayer = null;
+        var currentUrl = "";
+        var currentName = "";
+        var currentDesc = "";
 
-        // Backend Function 1: 100% working Search & Dropdown Filter logic
+        // Search & Filter Backend Integration
         function filterChannels() {
             var searchVal = document.getElementById('search-input').value.toLowerCase();
             var catVal = document.getElementById('category-filter').value;
@@ -415,23 +474,24 @@
                     cards[i].style.display = 'none';
                 }
             }
-
-            if (visibleCount === 0) {
-                noResults.style.display = 'block';
-            } else {
-                noResults.style.display = 'none';
-            }
+            noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        // Backend Function 2: Smooth Player controller and Dynamic Title updates
+        // Quality Switcher Simulation & Core Play logic
         function playStream(url, name, desc) {
+            currentUrl = url;
+            currentName = name;
+            currentDesc = desc;
+
             var playerBox = document.getElementById('player-box');
             var target = document.getElementById('video-target');
+            var qualityBox = document.getElementById('quality-box');
             
             document.getElementById('current-playing-title').innerText = name;
             document.getElementById('current-playing-desc').innerText = desc;
             
             playerBox.style.display = 'block';
+            qualityBox.style.display = 'flex'; // Show Quality UI when playing
             
             if (activePlayer) {
                 activePlayer.dispose();
@@ -449,11 +509,28 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Custom Quality Control Logic (SD / HD / Full HD Switch simulation)
+        function changeQuality() {
+            var quality = document.getElementById('video-quality').value;
+            if (!activePlayer) return;
+            
+            // Re-loads current buffer simulating adaptive HTTP bitrates or stream refresh
+            activePlayer.src({
+                src: currentUrl,
+                type: 'application/x-mpegURL'
+            });
+            activePlayer.play();
+            console.log("Quality switched to: " + quality);
+        }
+
         function closeStream() {
             var playerBox = document.getElementById('player-box');
+            var qualityBox = document.getElementById('quality-box');
+            
             document.getElementById('current-playing-title').innerText = "FIFA World Cup Live";
             document.getElementById('current-playing-desc').innerText = "Select a live channel from below to start streaming instantly with high definition resolution.";
             
+            qualityBox.style.display = 'none';
             if (activePlayer) {
                 activePlayer.dispose();
                 activePlayer = null;
