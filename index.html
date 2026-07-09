@@ -3,225 +3,467 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Till Infinity Live IPTV Player</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <title>Till Infinity Play - Premium IPTV</title>
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
+            background-color: #050811;
             color: #ffffff;
-            font-family: 'Poppins', 'Noto Serif Bengali', sans-serif;
-            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* 1. Header & Navigation */
+        header {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        /* Premium Glowing Background Elements */
-        .neon-glow {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #6366f1, #38bdf8);
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 0;
-            opacity: 0.12;
-            pointer-events: none;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            background: rgba(30, 41, 59, 0.45);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
-            padding: 35px;
+            padding: 20px 6%;
+            background: rgba(5, 8, 17, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 900px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo-area {
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
-
-        .logo-icon {
-            font-size: 2.8rem;
-            animation: pulse 2s infinite;
-        }
-
-        h1 {
-            font-size: 2.6rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            gap: 8px;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .subtitle {
-            color: #94a3b8;
+        .logo span {
+            color: #ff2a5f;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: #b3b3b3;
+            text-decoration: none;
             font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #ffffff;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-subscribe {
+            background: #ff2a5f;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 42, 95, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .btn-subscribe:hover {
+            transform: scale(1.05);
+        }
+
+        /* 2. Hero Live Banner & Player Section */
+        .hero-section {
+            margin-top: 80px;
+            position: relative;
+            width: 100%;
+            height: 65vh;
+            background: linear-gradient(to bottom, rgba(5, 8, 17, 0.2), #050811), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1920') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 0 6%;
+        }
+
+        /* Video Container Inside Hero when active */
+        .player-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: #000;
+            display: none;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .live-tag {
+            background: #ff2a5f;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .hero-tags span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #cccccc;
+        }
+
+        .hero-desc {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
             margin-bottom: 25px;
         }
 
-        /* Screen Wrapper with Premium Glass & Border Effect */
-        .player-wrapper {
+        /* 3. Filter & Search Bar */
+        .main-content {
+            padding: 40px 6%;
+        }
+
+        .search-filter-bar {
+            background: #0d1222;
+            padding: 20px;
+            border-radius: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
             position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            margin-bottom: 30px;
-            background: #020617;
-            aspect-ratio: 16 / 9;
         }
 
-        iframe {
-            width: 100% !important;
-            height: 100% !important;
-            border: none;
-        }
-
-        /* Dropdown UI Redesign */
-        .select-box {
-            position: relative;
+        .search-box input {
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        select {
-            width: 100%;
-            padding: 16px 24px;
-            font-size: 1.05rem;
-            color: #f8fafc;
-            background: #0f172a;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 14px;
-            cursor: pointer;
+            background: #13192e;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 20px;
+            border-radius: 10px;
+            color: white;
             outline: none;
-            appearance: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            text-align: center;
+            font-size: 0.95rem;
         }
 
-        select:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        .filter-dropdowns {
+            display: flex;
+            gap: 12px;
         }
 
-        .select-box::after {
-            content: '▼';
-            font-size: 0.8rem;
-            top: 22px;
-            right: 24px;
-            position: absolute;
-            color: #64748b;
-            pointer-events: none;
+        .filter-dropdowns select {
+            background: #13192e;
+            color: #cccccc;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 20px;
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
-        select optgroup {
-            background: #0f172a;
-            color: #38bdf8;
+        /* 4. Channels Grid Layout */
+        .grid-title {
+            font-size: 1.5rem;
             font-weight: 600;
-            text-align: left;
+            margin-bottom: 25px;
+            border-left: 4px solid #ff2a5f;
+            padding-left: 12px;
         }
 
-        select option {
-            background: #1e293b;
-            color: #f8fafc;
-            padding: 10px;
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
         }
 
-        footer {
-            margin-top: 30px;
-            color: #475569;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
+        .channel-card {
+            background: #0d1222;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            position: relative;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .channel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+            border-color: rgba(255, 42, 95, 0.3);
         }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .container { padding: 20px; }
-            select { padding: 12px 18px; font-size: 0.95rem; }
-            .select-box::after { top: 18px; right: 18px; }
+        .poster-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #161c33;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-live-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ff2a5f;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .channel-info {
+            padding: 15px;
+        }
+
+        .channel-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .channel-category {
+            font-size: 0.8rem;
+            color: #777d93;
+        }
+
+        /* Close Button for Video Player */
+        .close-player {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 10;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+        .close-player:hover { background: #ff2a5f; }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 4%; }
+            nav, .auth-buttons { display: none; }
+            .hero-title { font-size: 2.2rem; }
+            .main-content { padding: 20px 4%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="neon-glow"></div>
-
-    <div class="container">
-        <div class="logo-area">
-            <span class="logo-icon">📺</span>
-            <h1>Till Infinity IPTV</h1>
+    <!-- 1. Navigation Header -->
+    <header>
+        <div class="logo">TILL INFINITY<span>PLAY</span></div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">Live TV</a></li>
+                <li><a href="#">FIFA World Cup</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="#" class="btn-subscribe">Subscribe</a>
+            <a href="#" style="color: white; text-decoration: none; font-size: 0.95rem;">Sign In</a>
         </div>
-        <p class="subtitle">নিচের তালিকা থেকে আপনার পছন্দের সচল বাংলাদেশী লাইভ চ্যানেলটি বেছে নিন</p>
+    </header>
 
-        <!-- Dynamic Content Screen -->
-        <div class="player-wrapper" id="player-container">
-            <iframe src="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1&mute=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-        <!-- Styled Channel Selector -->
-        <div class="select-box">
-            <select id="channel-select" onchange="changeChannel()">
-                <option value="" disabled selected>একটি লাইভ চ্যানেল সিলেক্ট করুন...</option>
-                
-                <optgroup label="🇧🇩 বাংলাদেশী নিউজ ও বিনোদন (Working)">
-                    <option value="https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1">Somoy TV (সময় টিভি)</option>
-                    <option value="https://www.youtube.com/embed/H0GekvXq0_g?autoplay=1">Jamuna TV (যমুনা টিভি)</option>
-                    <option value="https://www.youtube.com/embed/9wG9Dsl57S4?autoplay=1">Independent TV (ইন্ডিপেন্ডেন্ট টিভি)</option>
-                    <option value="https://www.youtube.com/embed/2_YIlyv5Psg?autoplay=1">News24 (নিউজ ২৪)</option>
-                    <option value="https://www.youtube.com/embed/P-zXw13D2pQ?autoplay=1">Channel i (চ্যানেল আই)</option>
-                    <option value="https://www.youtube.com/embed/PqNq5-g8tmg?autoplay=1">RTV Live (আরটিভি)</option>
-                </optgroup>
-
-                <optgroup label="🌍 গ্লোবাল নিউজ চ্যানেল">
-                    <option value="https://www.youtube.com/embed/2mCSY3f8Sgk?autoplay=1">ABC News Live</option>
-                    <option value="https://www.youtube.com/embed/9AuqEj535lg?autoplay=1">DW News Live</option>
-                </optgroup>
-            </select>
+    <!-- 2. Hero Live Screen -->
+    <section class="hero-section" id="hero-banner">
+        <div class="player-container" id="player-box">
+            <button class="close-player" onclick="closeStream()">✕ Close Player</button>
+            <div style="width: 100%; height: 100%;" id="video-target"></div>
         </div>
 
-        <footer>&copy; 2026 Till Infinity. All Rights Reserved.</footer>
-    </div>
+        <div class="hero-content">
+            <div class="live-tag">● Live Now</div>
+            <h1 class="hero-title">FIFA World Cup Live</h1>
+            <div class="hero-tags">
+                <span>Sports</span>
+                <span>Football</span>
+                <span>International</span>
+            </div>
+            <p class="hero-desc">Watch live sports, highlights, and analysis on your favorite sports channels. Streaming in full HD on Till Infinity Play.</p>
+        </div>
+    </section>
+
+    <!-- 3. Filter and Content Grid -->
+    <main class="main-content">
+        <div class="search-filter-bar">
+            <div class="search-box">
+                <input type="text" placeholder="Search channels...">
+            </div>
+            <div class="filter-dropdowns">
+                <select>
+                    <option>All Categories</option>
+                    <option>News</option>
+                    <option>Entertainment</option>
+                    <option>Kids</option>
+                </select>
+                <select>
+                    <option>All Countries</option>
+                    <option>Bangladesh</option>
+                    <option>International</option>
+                </select>
+                <select>
+                    <option>Newest Added</option>
+                </select>
+            </div>
+        </div>
+
+        <h2 class="grid-title">Live Channels</h2>
+        
+        <!-- Channels Grid -->
+        <div class="channels-grid">
+            
+            <!-- Channel 1 -->
+            <div class="channel-card" onclick="playStream('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', 'Demo Movie HD')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <span style="font-size: 3rem;">🎬</span>
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Demo Movie HD</div>
+                    <div class="channel-category">Entertainment</div>
+                </div>
+            </div>
+
+            <!-- Channel 2 -->
+            <div class="channel-card" onclick="playStream('https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8', 'NHK World Japan')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <span style="font-size: 3rem;">🇯🇵</span>
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">NHK World Japan</div>
+                    <div class="channel-category">News / International</div>
+                </div>
+            </div>
+
+            <!-- Channel 3 -->
+            <div class="channel-card" onclick="playStream('https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8', 'Test Sports')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <span style="font-size: 3rem;">⚽</span>
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Test Sports Stream</div>
+                    <div class="channel-category">Sports</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Video.js JS Script -->
+    <script src="https://vjs.zencdn.net/8.3.0/video.js"></script>
 
     <script>
-        function changeChannel() {
-            var select = document.getElementById("channel-select");
-            var url = select.value;
-            var container = document.getElementById("player-container");
+        var activePlayer = null;
 
-            if (url) {
-                // Instantly update the iframe source with smooth injection
-                container.innerHTML = `<iframe src="${url}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+        function playStream(url, name) {
+            var playerBox = document.getElementById('player-box');
+            var target = document.getElementById('video-target');
+            
+            // Show player screen
+            playerBox.style.display = 'block';
+            
+            // Clear any old player instances safely
+            if (activePlayer) {
+                activePlayer.dispose();
             }
+
+            // Inject fresh video element
+            target.innerHTML = `<video id="live-video" class="video-js vjs-default-skin" controls preload="auto" style="width:100%; height:100%;"></video>`;
+            
+            // Initialize Video.js for real HLS streaming
+            activePlayer = videojs('live-video');
+            activePlayer.src({
+                src: url,
+                type: 'application/x-mpegURL'
+            });
+            activePlayer.play();
+
+            // Smoothly scroll to the top player view
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeStream() {
+            var playerBox = document.getElementById('player-box');
+            if (activePlayer) {
+                activePlayer.dispose();
+                activePlayer = null;
+            }
+            playerBox.style.display = 'none';
         }
     </script>
 </body>
