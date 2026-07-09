@@ -95,7 +95,7 @@
         .select-box {
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
         }
 
@@ -134,6 +134,13 @@
             color: #fff;
         }
 
+        /* Group Heading Style inside Dropdown */
+        select optgroup {
+            background: #1e1b4b;
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
         footer {
             margin-top: 20px;
             color: #64748b;
@@ -170,13 +177,27 @@
             </video>
         </div>
 
-        <!-- Custom Channel Selector -->
+        <!-- Custom Channel Selector with Categorized Channels -->
         <div class="select-box">
             <select id="channel-select" onchange="changeChannel()">
                 <option value="" disabled selected>একটি চ্যানেল বেছে নিন...</option>
-                <!-- ডেমো সচল চ্যানেল (পরীক্ষা করার জন্য) -->
-                <option value="https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8">Demo Channel 1 (HD)</option>
-                <option value="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">Demo Channel 2 (Movie)</option>
+                
+                <optgroup label="🇧🇩 বাংলাদেশী চ্যানেল">
+                    <option value="https://nagorik-tvec.toptv.top/nagoriktv/index.m3u8">Nagorik TV</option>
+                    <option value="https://bongobd-atn-news.akamaized.net/hls/live/2099317/atnnews/atnnews_1.m3u8">ATN News</option>
+                    <option value="https://nexustv.livebox.com.bd/nexus-tv/index.m3u8">Nexus TV</option>
+                </optgroup>
+
+                <optgroup label="🌍 আন্তর্জাতিক সংবাদ ও বিনোদন">
+                    <option value="https://rt-global.akamaized.net/hls/live/574501/rtnews/eng.m3u8">RT News (English)</option>
+                    <option value="https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8">NHK World (Japan)</option>
+                    <option value="https://cna-hls.akamaized.net/hls/live/2026886/cna/master.m3u8">CNA News (Singapore)</option>
+                </optgroup>
+
+                <optgroup label="🧪 টেস্ট ও অন্যান্য চ্যানেল">
+                    <option value="https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8">Demo HD Stream</option>
+                    <option value="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">Demo Movie Stream</option>
+                </optgroup>
             </select>
         </div>
 
@@ -196,7 +217,7 @@
             if (url) {
                 player.src({
                     src: url,
-                    type: 'application/x-mpegURL' // HLS Streaming Formatter
+                    type: 'application/x-mpegURL'
                 });
                 player.play();
             }
