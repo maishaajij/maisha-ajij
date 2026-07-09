@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Till Infinity Live IPTV Player</title>
+    <!-- Video.js CSS for Professional Player -->
+    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Background Animated Circles for Graphics */
+        .circle {
+            position: absolute;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.15;
+        }
+        .circle-1 { width: 400px; height: 400px; top: -10%; left: -10%; }
+        .circle-2 { width: 500px; height: 500px; bottom: -10%; right: -10%; }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            width: 100%;
+            max-width: 850px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #38bdf8, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        /* Player Wrapper with Neon Glow */
+        .player-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.3);
+            border: 2px solid rgba(99, 102, 241, 0.5);
+            margin-bottom: 25px;
+            background: #000;
+        }
+
+        .video-js {
+            width: 100% !important;
+            height: auto;
+            aspect-ratio: 16 / 9;
+        }
+
+        /* Custom Styling for Select Dropdown */
+        .select-box {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        select:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .select-box::after {
+            content: '▼';
+            font-size: 0.8rem;
+            top: 18px;
+            right: 20px;
+            position: absolute;
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        select option {
+            background: #0f172a;
+            color: #fff;
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Decorative Graphics Background Elements -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+
+    <div class="container">
+        <h1>📺 Till Infinity IPTV</h1>
+        <p>নিচের ড্রপডাউন মেনু থেকে আপনার পছন্দের লাইভ চ্যানেলটি সিলেক্ট করুন</p>
+
+        <!-- Strong Video Player Container -->
+        <div class="player-wrapper">
+            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" data-setup="{}">
+                <p class="vjs-no-js">
+                    ভিডিওটি দেখার জন্য ব্রাউজারে জাভাস্ক্রিপ্ট সচল করুন।
+                </p>
+            </video>
+        </div>
+
+        <!-- Custom Channel Selector -->
+        <div class="select-box">
+            <select id="channel-select" onchange="changeChannel()">
+                <option value="" disabled selected>একটি চ্যানেল বেছে নিন...</option>
+                <!-- ডেমো সচল চ্যানেল (পরীক্ষা করার জন্য) -->
+                <option value="https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8">Demo Channel 1 (HD)</option>
+                <option value="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">Demo Channel 2 (Movie)</option>
+            </select>
+        </div>
+
+        <footer>&copy; 2026 Till Infinity. All Rights Reserved.</footer>
+    </div>
+
+    <!-- Video.js Script for Streaming Support -->
+    <script src="https://vjs.zencdn.net/8.3.0/video.js"></script>
+
+    <script>
+        var player = videojs('my-video');
+
+        function changeChannel() {
+            var select = document.getElementById("channel-select");
+            var url = select.value;
+
+            if (url) {
+                player.src({
+                    src: url,
+                    type: 'application/x-mpegURL' // HLS Streaming Formatter
+                });
+                player.play();
+            }
+        }
+    </script>
+</body>
+</html>
