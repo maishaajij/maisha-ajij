@@ -30,7 +30,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 6%;
-            background: rgba(5, 8, 17, 0.85);
+            background: rgba(5, 8, 17, 0.95);
             backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
@@ -91,30 +91,26 @@
             transition: transform 0.2s;
         }
 
-        .btn-subscribe:hover {
-            transform: scale(1.05);
-        }
-
-        /* 2. Hero Live Banner & Player Section */
+        /* 2. Hero Section & Dynamic Player Workspace */
         .hero-section {
             margin-top: 80px;
             position: relative;
             width: 100%;
             height: 65vh;
-            background: linear-gradient(to bottom, rgba(5, 8, 17, 0.2), #050811), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1920') center/cover no-repeat;
+            background: linear-gradient(to bottom, rgba(5, 8, 17, 0.1), #050811), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1920') center/cover no-repeat;
             display: flex;
             align-items: center;
             padding: 0 6%;
+            transition: all 0.5s ease;
         }
 
-        /* Video Container Inside Hero when active */
         .player-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
+            z-index: 10;
             background: #000;
             display: none;
         }
@@ -135,7 +131,6 @@
             text-transform: uppercase;
             display: inline-block;
             margin-bottom: 15px;
-            letter-spacing: 1px;
         }
 
         .hero-title {
@@ -145,28 +140,13 @@
             line-height: 1.1;
         }
 
-        .hero-tags {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .hero-tags span {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: #cccccc;
-        }
-
         .hero-desc {
             color: #aaaaaa;
             font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 25px;
         }
 
-        /* 3. Filter & Search Bar */
+        /* 3. Search and Functional Filters Dashboard */
         .main-content {
             padding: 40px 6%;
         }
@@ -186,7 +166,6 @@
         .search-box {
             flex: 1;
             min-width: 250px;
-            position: relative;
         }
 
         .search-box input {
@@ -200,11 +179,6 @@
             font-size: 0.95rem;
         }
 
-        .filter-dropdowns {
-            display: flex;
-            gap: 12px;
-        }
-
         .filter-dropdowns select {
             background: #13192e;
             color: #cccccc;
@@ -216,7 +190,7 @@
             font-size: 0.9rem;
         }
 
-        /* 4. Channels Grid Layout */
+        /* 4. Functional Grid Cards */
         .grid-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -227,7 +201,7 @@
 
         .channels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 25px;
         }
 
@@ -236,24 +210,19 @@
             border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, border-color 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.02);
-            position: relative;
         }
 
         .channel-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
-            border-color: rgba(255, 42, 95, 0.3);
+            border-color: #ff2a5f;
         }
 
         .poster-wrapper {
             width: 100%;
             aspect-ratio: 16 / 10;
             background: #161c33;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
         }
 
@@ -273,7 +242,6 @@
             font-weight: 700;
             padding: 2px 8px;
             border-radius: 3px;
-            text-transform: uppercase;
         }
 
         .channel-info {
@@ -292,104 +260,109 @@
             color: #777d93;
         }
 
-        /* Close Button for Video Player */
         .close-player {
             position: absolute;
             top: 25px;
             right: 25px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 42, 95, 0.9);
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 20px;
             cursor: pointer;
-            z-index: 10;
+            z-index: 20;
             font-weight: 600;
-            backdrop-filter: blur(5px);
         }
-        .close-player:hover { background: #ff2a5f; }
 
-        @media (max-width: 768px) {
-            header { padding: 15px 4%; }
-            nav, .auth-buttons { display: none; }
-            .hero-title { font-size: 2.2rem; }
-            .main-content { padding: 20px 4%; }
+        /* Not Found Message styling */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #777d93;
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #475569;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Navigation Header -->
     <header>
         <div class="logo">TILL INFINITY<span>PLAY</span></div>
         <nav>
             <ul>
                 <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Movies</a></li>
                 <li><a href="#">Live TV</a></li>
-                <li><a href="#">FIFA World Cup</a></li>
-                <li><a href="#">Blog</a></li>
             </ul>
         </nav>
         <div class="auth-buttons">
             <a href="#" class="btn-subscribe">Subscribe</a>
-            <a href="#" style="color: white; text-decoration: none; font-size: 0.95rem;">Sign In</a>
         </div>
     </header>
 
-    <!-- 2. Hero Live Screen -->
     <section class="hero-section" id="hero-banner">
         <div class="player-container" id="player-box">
             <button class="close-player" onclick="closeStream()">✕ Close Player</button>
             <div style="width: 100%; height: 100%;" id="video-target"></div>
         </div>
-
-        <div class="hero-content">
+        <div class="hero-content" id="hero-text-content">
             <div class="live-tag">● Live Now</div>
-            <h1 class="hero-title">FIFA World Cup Live</h1>
-            <div class="hero-tags">
-                <span>Sports</span>
-                <span>Football</span>
-                <span>International</span>
-            </div>
-            <p class="hero-desc">Watch live sports, highlights, and analysis on your favorite sports channels. Streaming in full HD on Till Infinity Play.</p>
+            <h1 class="hero-title" id="current-playing-title">FIFA World Cup Live</h1>
+            <p class="hero-desc" id="current-playing-desc">Select a live channel from below to start streaming instantly with high definition resolution.</p>
         </div>
     </section>
 
-    <!-- 3. Filter and Content Grid -->
     <main class="main-content">
+        <!-- 100% Functional Filter Dashboard -->
         <div class="search-filter-bar">
             <div class="search-box">
-                <input type="text" placeholder="Search channels...">
+                <input type="text" id="search-input" onkeyup="filterChannels()" placeholder="Search channels by name...">
             </div>
             <div class="filter-dropdowns">
-                <select>
-                    <option>All Categories</option>
-                    <option>News</option>
-                    <option>Entertainment</option>
-                    <option>Kids</option>
-                </select>
-                <select>
-                    <option>All Countries</option>
-                    <option>Bangladesh</option>
-                    <option>International</option>
-                </select>
-                <select>
-                    <option>Newest Added</option>
+                <select id="category-filter" onchange="filterChannels()">
+                    <option value="all">All Categories</option>
+                    <option value="news">News</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="sports">Sports</option>
                 </select>
             </div>
         </div>
 
         <h2 class="grid-title">Live Channels</h2>
         
-        <!-- Channels Grid -->
-        <div class="channels-grid">
+        <!-- Channels Dynamic Grid Area -->
+        <div class="channels-grid" id="channels-grid-container">
             
-            <!-- Channel 1 -->
-            <div class="channel-card" onclick="playStream('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', 'Demo Movie HD')">
+            <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
+
+            <!-- --------------------------------------------------------------------------------- -->
+            <!-- [চ্যানেল যোগ করার জায়গা] নিচে আপনার লিঙ্কগুলো এভাবে এক এক করে বসাবেন বা আমাকে দিন -->
+            <!-- --------------------------------------------------------------------------------- -->
+            
+            <!-- চ্যানেল ১ (News উদাহরণ) -->
+            <div class="channel-card" data-name="nhk world japan news" data-category="news" onclick="playStream('https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8', 'NHK World Japan', 'Category: News / International')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <span style="font-size: 3rem;">🎬</span>
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600" alt="News Poster">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">NHK World Japan</div>
+                    <div class="channel-category">News</div>
+                </div>
+            </div>
+
+            <!-- চ্যানেল ২ (Entertainment উদাহরণ) -->
+            <div class="channel-card" data-name="demo movie hd premium" data-category="entertainment" onclick="playStream('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', 'Demo Movie HD', 'Category: Entertainment / Movies')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600" alt="Entertainment Poster">
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">Demo Movie HD</div>
@@ -397,23 +370,11 @@
                 </div>
             </div>
 
-            <!-- Channel 2 -->
-            <div class="channel-card" onclick="playStream('https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8', 'NHK World Japan')">
+            <!-- চ্যানেল ৩ (Sports উদাহরণ) -->
+            <div class="channel-card" data-name="test sports stream football" data-category="sports" onclick="playStream('https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8', 'Test Sports Stream', 'Category: Live Sports / Football')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <span style="font-size: 3rem;">🇯🇵</span>
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">NHK World Japan</div>
-                    <div class="channel-category">News / International</div>
-                </div>
-            </div>
-
-            <!-- Channel 3 -->
-            <div class="channel-card" onclick="playStream('https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8', 'Test Sports')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <span style="font-size: 3rem;">⚽</span>
+                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600" alt="Sports Poster">
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">Test Sports Stream</div>
@@ -424,28 +385,60 @@
         </div>
     </main>
 
-    <!-- Video.js JS Script -->
+    <footer>&copy; 2026 Till Infinity. All Rights Reserved.</footer>
+
+    <!-- Video.js Script -->
     <script src="https://vjs.zencdn.net/8.3.0/video.js"></script>
 
     <script>
         var activePlayer = null;
 
-        function playStream(url, name) {
+        // Backend Function 1: 100% working Search & Dropdown Filter logic
+        function filterChannels() {
+            var searchVal = document.getElementById('search-input').value.toLowerCase();
+            var catVal = document.getElementById('category-filter').value;
+            var cards = document.getElementsByClassName('channel-card');
+            var noResults = document.getElementById('no-results-msg');
+            var visibleCount = 0;
+
+            for (var i = 0; i < cards.length; i++) {
+                var name = cards[i].getAttribute('data-name');
+                var category = cards[i].getAttribute('data-category');
+                
+                var matchesSearch = name.includes(searchVal);
+                var matchesCategory = (catVal === 'all' || category === catVal);
+
+                if (matchesSearch && matchesCategory) {
+                    cards[i].style.display = 'block';
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = 'none';
+                }
+            }
+
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        // Backend Function 2: Smooth Player controller and Dynamic Title updates
+        function playStream(url, name, desc) {
             var playerBox = document.getElementById('player-box');
             var target = document.getElementById('video-target');
             
-            // Show player screen
+            document.getElementById('current-playing-title').innerText = name;
+            document.getElementById('current-playing-desc').innerText = desc;
+            
             playerBox.style.display = 'block';
             
-            // Clear any old player instances safely
             if (activePlayer) {
                 activePlayer.dispose();
             }
 
-            // Inject fresh video element
             target.innerHTML = `<video id="live-video" class="video-js vjs-default-skin" controls preload="auto" style="width:100%; height:100%;"></video>`;
             
-            // Initialize Video.js for real HLS streaming
             activePlayer = videojs('live-video');
             activePlayer.src({
                 src: url,
@@ -453,12 +446,14 @@
             });
             activePlayer.play();
 
-            // Smoothly scroll to the top player view
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function closeStream() {
             var playerBox = document.getElementById('player-box');
+            document.getElementById('current-playing-title').innerText = "FIFA World Cup Live";
+            document.getElementById('current-playing-desc').innerText = "Select a live channel from below to start streaming instantly with high definition resolution.";
+            
             if (activePlayer) {
                 activePlayer.dispose();
                 activePlayer = null;
