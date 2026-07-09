@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Till Infinity Live IPTV Player</title>
-    <!-- Video.js CSS for Professional Player -->
+    <!-- Video.js CSS -->
     <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -29,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* Background Animated Circles for Graphics */
         .circle {
             position: absolute;
             background: linear-gradient(135deg, #6366f1, #a855f7);
@@ -54,7 +52,6 @@
             max-width: 850px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             text-align: center;
-            animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
@@ -65,16 +62,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         p {
             color: #94a3b8;
-            font-size: 1rem;
             margin-bottom: 25px;
         }
 
-        /* Player Wrapper with Neon Glow */
         .player-wrapper {
             position: relative;
             border-radius: 16px;
@@ -83,15 +77,15 @@
             border: 2px solid rgba(99, 102, 241, 0.5);
             margin-bottom: 25px;
             background: #000;
-        }
-
-        .video-js {
-            width: 100% !important;
-            height: auto;
             aspect-ratio: 16 / 9;
         }
 
-        /* Custom Styling for Select Dropdown */
+        .video-js, iframe {
+            width: 100% !important;
+            height: 100% !important;
+            border: none;
+        }
+
         .select-box {
             position: relative;
             width: 100%;
@@ -110,13 +104,6 @@
             cursor: pointer;
             outline: none;
             appearance: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        select:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
         }
 
         .select-box::after {
@@ -129,16 +116,9 @@
             pointer-events: none;
         }
 
-        select option {
+        select option, select optgroup {
             background: #0f172a;
             color: #fff;
-        }
-
-        /* Group Heading Style inside Dropdown */
-        select optgroup {
-            background: #1e1b4b;
-            color: #38bdf8;
-            font-weight: 600;
         }
 
         footer {
@@ -146,57 +126,37 @@
             color: #64748b;
             font-size: 0.85rem;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .container { padding: 15px; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Decorative Graphics Background Elements -->
     <div class="circle circle-1"></div>
     <div class="circle circle-2"></div>
 
     <div class="container">
         <h1>📺 Till Infinity IPTV</h1>
-        <p>নিচের ড্রপডাউন মেনু থেকে আপনার পছন্দের লাইভ চ্যানেলটি সিলেক্ট করুন</p>
+        <p>নিচের ড্রপডাউন মেনু থেকে লাইভ চ্যানেল সিলেক্ট করুন</p>
 
-        <!-- Strong Video Player Container -->
-        <div class="player-wrapper">
-            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" data-setup="{}">
-                <p class="vjs-no-js">
-                    ভিডিওটি দেখার জন্য ব্রাউজারে জাভাস্ক্রিপ্ট সচল করুন।
-                </p>
+        <div class="player-wrapper" id="player-container">
+            <!-- Default Placeholder Player -->
+            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto">
+                <source src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" type="application/x-mpegURL">
             </video>
         </div>
 
-        <!-- Custom Channel Selector with Categorized Channels -->
         <div class="select-box">
             <select id="channel-select" onchange="changeChannel()">
                 <option value="" disabled selected>একটি চ্যানেল বেছে নিন...</option>
                 
-                <optgroup label="🇧🇩 বাংলাদেশী চ্যানেল">
-                    <option value="https://nagorik-tvec.toptv.top/nagoriktv/index.m3u8">Nagorik TV</option>
-                    <option value="https://bongobd-atn-news.akamaized.net/hls/live/2099317/atnnews/atnnews_1.m3u8">ATN News</option>
-                    <option value="https://nexustv.livebox.com.bd/nexus-tv/index.m3u8">Nexus TV</option>
+                <optgroup label="🔴 লাইভ নিউজ (স্থায়ী)">
+                    <option value="youtube:https://www.youtube.com/embed/gCNeDWCI0vo?autoplay=1">Al Jazeera English (Live)</option>
+                    <option value="youtube:https://www.youtube.com/embed/2mCSY3f8Sgk?autoplay=1">ABC News Live</option>
+                    <option value="youtube:https://www.youtube.com/embed/9AuqEj535lg?autoplay=1">DW News Live</option>
                 </optgroup>
 
-                <optgroup label="🌍 আন্তর্জাতিক সংবাদ ও বিনোদন">
-                    <option value="https://rt-global.akamaized.net/hls/live/574501/rtnews/eng.m3u8">RT News (English)</option>
-                    <option value="https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8">NHK World (Japan)</option>
-                    <option value="https://cna-hls.akamaized.net/hls/live/2026886/cna/master.m3u8">CNA News (Singapore)</option>
-                </optgroup>
-
-                <optgroup label="🧪 টেস্ট ও অন্যান্য চ্যানেল">
-                    <option value="https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8">Demo HD Stream</option>
-                    <option value="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">Demo Movie Stream</option>
+                <optgroup label="🌍 গ্লোবাল ফ্রি স্ট্রিম (HLS)">
+                    <option value="hls:https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8">HD Demo Movie</option>
+                    <option value="hls:https://nhkworld.akamaized.net/hls/live/2023583/nhkworld/g_stream_1080.m3u8">NHK World (Japan)</option>
                 </optgroup>
             </select>
         </div>
@@ -204,7 +164,6 @@
         <footer>&copy; 2026 Till Infinity. All Rights Reserved.</footer>
     </div>
 
-    <!-- Video.js Script for Streaming Support -->
     <script src="https://vjs.zencdn.net/8.3.0/video.js"></script>
 
     <script>
@@ -212,14 +171,31 @@
 
         function changeChannel() {
             var select = document.getElementById("channel-select");
-            var url = select.value;
+            var rawValue = select.value;
+            var container = document.getElementById("player-container");
 
-            if (url) {
-                player.src({
-                    src: url,
-                    type: 'application/x-mpegURL'
-                });
-                player.play();
+            if (!rawValue) return;
+
+            var type = rawValue.split(':')[0];
+            var url = rawValue.substring(type.length + 1);
+
+            if (type === 'youtube') {
+                // Destroy videojs instance if it exists to avoid conflict
+                if (player) {
+                    player.dispose();
+                    player = null;
+                }
+                container.innerHTML = `<iframe src="${url}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+            } else if (type === 'hls') {
+                container.innerHTML = `<video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"></video>`;
+                setTimeout(function() {
+                    player = videojs('my-video');
+                    player.src({
+                        src: url,
+                        type: 'application/x-mpegURL'
+                    });
+                    player.play();
+                }, 50);
             }
         }
     </script>
