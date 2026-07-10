@@ -279,7 +279,7 @@
         <div class="hero-content">
             <div class="live-tag">● Live Now</div>
             <h1 class="hero-title" id="current-playing-title">Premium IPTV Dashboard</h1>
-            <p class="hero-desc" id="current-playing-desc">Select a live working channel below. Powered by Clappr HTML5 Stream Engine.</p>
+            <p class="hero-desc" id="current-playing-desc">Select a live working channel below. Powered by Clappr Timeout Bypass Engine.</p>
         </div>
     </section>
 
@@ -297,13 +297,37 @@
             </div>
         </div>
 
-        <h2 class="grid-title">Working Live Channels</h2>
+        <h2 class="grid-title">Available Channels</h2>
         
         <div class="channels-grid">
             <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
 
-            <!-- 1. Somoy TV -->
-            <div class="channel-card" data-name="somoy tv" data-category="sports" onclick="playStream('https://tvsen6.aynaott.com/somoytv/index.m3u8', 'Somoy TV', 'Sports Mode - High Definition Stream')">
+            <!-- 1. Red Bull TV (100% Active Global Sports) -->
+            <div class="channel-card" data-name="red bull tv sports" data-category="sports" onclick="playStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull Sports TV', 'Extreme Sports and Live Racing - 1080p HD')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://images.unsplash.com/photo-1540747737956-37872ee754ad?q=80&w=600" alt="Sports Image">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Red Bull Sports TV</div>
+                    <div class="channel-category">Sports</div>
+                </div>
+            </div>
+
+            <!-- 2. Fashion TV (100% Active Entertainment) -->
+            <div class="channel-card" data-name="fashion tv entertainment" data-category="entertainment" onclick="playStream('https://fash1043.cloudycdn.be/stream.m3u8', 'Fashion TV HD', 'Global Lifestyle & Entertainment Stream')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600" alt="Entertainment Image">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Fashion TV HD</div>
+                    <div class="channel-category">Entertainment</div>
+                </div>
+            </div>
+
+            <!-- 3. Somoy TV (Your Link) -->
+            <div class="channel-card" data-name="somoy tv" data-category="sports" onclick="playStream('https://tvsen6.aynaott.com/somoytv/index.m3u8', 'Somoy TV', 'Sports Mode - Network Check')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
                     <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600" alt="Sports Image">
@@ -314,11 +338,11 @@
                 </div>
             </div>
 
-            <!-- 2. T Sports -->
-            <div class="channel-card" data-name="t sports" data-category="sports" onclick="playStream('https://trs1.aynaott.com/tsports/index.m3u8', 'T Sports', 'Sports Mode - Ultra Quality Stream')">
+            <!-- 4. T Sports (Your Link) -->
+            <div class="channel-card" data-name="t sports" data-category="sports" onclick="playStream('https://trs1.aynaott.com/tsports/index.m3u8', 'T Sports', 'Sports Mode - Network Check')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1540747737956-37872ee754ad?q=80&w=600" alt="Sports Image">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=600" alt="Sports Image">
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">T Sports</div>
@@ -326,42 +350,17 @@
                 </div>
             </div>
 
-            <!-- 3. CAZE TV -->
+            <!-- 5. CAZE TV (Your Link) -->
             <div class="channel-card" data-name="caze tv" data-category="sports" onclick="playStream('https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8', 'CAZE TV', 'International Sports Broadcast')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=600" alt="Sports Image">
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600" alt="News Image">
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">CAZE TV</div>
                     <div class="channel-category">Sports</div>
                 </div>
             </div>
-
-            <!-- 4. Colours TV -->
-            <div class="channel-card" data-name="colours tv" data-category="entertainment" onclick="playStream('http://103.72.101.252:8080/live/1368.m3u8', 'Colours TV', 'Entertainment Mode - Serial Drama')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600" alt="Entertainment Image">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Colours TV</div>
-                    <div class="channel-category">Entertainment</div>
-                </div>
-            </div>
-
-            <!-- 5. Global Movie HD -->
-            <div class="channel-card" data-name="global movie hd premium" data-category="entertainment" onclick="playStream('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8', 'Global Movie HD', 'Entertainment Mode - Cinema HD')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=600" alt="Movie Image">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Global Movie HD</div>
-                    <div class="channel-category">Entertainment</div>
-                </div>
-            </div>
-
         </div>
     </main>
 
@@ -402,9 +401,8 @@
             document.getElementById('current-playing-desc').innerText = desc;
             
             playerBox.style.display = 'block';
-            target.innerHTML = ""; // Clear wrapper
+            target.innerHTML = ""; 
             
-            // Core Clappr engine deployment
             playerInstance = new Clappr.Player({
                 source: url,
                 parentId: "#video-target",
@@ -412,7 +410,15 @@
                 autoPlay: true,
                 width: '100%',
                 height: '100%',
-                mute: false
+                mute: false,
+                // Network configurations to avoid early manifest timeouts
+                playback: {
+                    hlsjsConfig: {
+                        manifestLoadingTimeOut: 20000, 
+                        manifestLoadingMaxRetry: 5,
+                        levelLoadingTimeOut: 20000
+                    }
+                }
             });
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -421,7 +427,7 @@
         function closeStream() {
             var playerBox = document.getElementById('player-box');
             document.getElementById('current-playing-title').innerText = "Premium IPTV Dashboard";
-            document.getElementById('current-playing-desc').innerText = "Select a live working channel below. Powered by Clappr HTML5 Stream Engine.";
+            document.getElementById('current-playing-desc').innerText = "Select a live working channel below. Powered by Clappr Timeout Bypass Engine.";
             
             if (playerInstance) {
                 playerInstance.destroy();
