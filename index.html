@@ -66,8 +66,7 @@
             position: relative;
             width: 100%;
             height: 65vh;
-            background: linear-gradient(to bottom, rgba(5, 8, 17, 0.1), #050811);
-            background-color: #0d1222;
+            background: #0d1222;
             display: flex;
             align-items: center;
             padding: 0 6%;
@@ -196,19 +195,12 @@
             aspect-ratio: 16 / 10;
             background: linear-gradient(135deg, #1e293b, #0f172a);
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .poster-placeholder {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.7);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-            padding: 10px;
+        .poster-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .card-live-badge {
@@ -288,7 +280,7 @@
         <div class="hero-content">
             <div class="live-tag">● Live Now</div>
             <h1 class="hero-title" id="current-playing-title">Premium IPTV Dashboard</h1>
-            <p class="hero-desc" id="current-playing-desc">Select a live working channel below. Powered by Clappr Timeout Bypass Engine.</p>
+            <p class="hero-desc" id="current-playing-desc">Select a live working channel below. Powered by Multi-Route Fallback System.</p>
         </div>
     </section>
 
@@ -311,11 +303,23 @@
         <div class="channels-grid">
             <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
 
-            <!-- 1. Red Bull TV (Active) -->
-            <div class="channel-card" data-name="red bull tv sports" data-category="sports" onclick="playStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull Sports TV', 'Extreme Sports and Live Racing - 1080p HD')">
+            <!-- New Andromeda Channel (With Images & Multi-links Fallback) -->
+            <div class="channel-card" data-name="andromeda entertainment" data-category="entertainment" onclick="playMultiRoute(['https://jmp2.uk/plu-663a163f8ea5560008a3f234.m3u8', 'https://jmp2.uk/plu-6177fb39b68ef1000725e59e.m3u8', 'https://jmp2.uk/plu-617807a1a3a6160007f615e4.m3u8', 'https://jmp2.uk/plu-6178156e54712100072d6b2b.m3u8', 'https://jmp2.uk/plu-6850335b5965a2fd49f7e36d.m3u8'], 'Andromeda', 'Premium Movie & Entertainment Network')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <div class="poster-placeholder">Red Bull TV</div>
+                    <img src="https://images.directv.com/contentdam/dtv/production/assets/nebula-images/network-logos/v3/Dark_Andromeda_600x400.png" onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Andromeda'" alt="Andromeda">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Andromeda</div>
+                    <div class="channel-category">Entertainment</div>
+                </div>
+            </div>
+
+            <!-- Red Bull TV (Active) -->
+            <div class="channel-card" data-name="red bull tv sports" data-category="sports" onclick="playSingleRoute('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull Sports TV', 'Extreme Sports and Live Racing - 1080p HD')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=Red+Bull+TV" alt="Red Bull TV">
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">Red Bull Sports TV</div>
@@ -323,53 +327,18 @@
                 </div>
             </div>
 
-            <!-- 2. Fashion TV (Active) -->
-            <div class="channel-card" data-name="fashion tv entertainment" data-category="entertainment" onclick="playStream('https://fash1043.cloudycdn.be/stream.m3u8', 'Fashion TV HD', 'Global Lifestyle & Entertainment Stream')">
+            <!-- CAZE TV (Bypassed Proxy Added) -->
+            <div class="channel-card" data-name="caze tv" data-category="sports" onclick="playSingleRoute('https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8', 'CAZE TV', 'International Sports Broadcast')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <div class="poster-placeholder">Fashion TV</div>
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Fashion TV HD</div>
-                    <div class="channel-category">Entertainment</div>
-                </div>
-            </div>
-
-            <!-- 3. Somoy TV (Replace URL with your new feed link) -->
-            <div class="channel-card" data-name="somoy tv" data-category="sports" onclick="playStream('https://tvsen6.aynaott.com/somoytv/index.m3u8', 'Somoy TV', 'Sports Mode - Paste your live feed link here')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <div class="poster-placeholder">Somoy TV</div>
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Somoy TV</div>
-                    <div class="channel-category">Sports</div>
-                </div>
-            </div>
-
-            <!-- 4. T Sports (Replace URL with your new feed link) -->
-            <div class="channel-card" data-name="t sports" data-category="sports" onclick="playStream('https://trs1.aynaott.com/tsports/index.m3u8', 'T Sports', 'Sports Mode - Paste your live feed link here')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <div class="poster-placeholder">T Sports</div>
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">T Sports</div>
-                    <div class="channel-category">Sports</div>
-                </div>
-            </div>
-
-            <!-- 5. CAZE TV -->
-            <div class="channel-card" data-name="caze tv" data-category="sports" onclick="playStream('https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8', 'CAZE TV', 'International Sports Broadcast')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <div class="poster-placeholder">CAZE TV</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=CAZE+TV" alt="CAZE TV">
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">CAZE TV</div>
                     <div class="channel-category">Sports</div>
                 </div>
             </div>
+
         </div>
     </main>
 
@@ -388,7 +357,6 @@
             for (var i = 0; i < cards.length; i++) {
                 var name = cards[i].getAttribute('data-name');
                 var category = cards[i].getAttribute('data-category');
-                
                 var matchesSearch = name.includes(searchVal);
                 var matchesCategory = (catVal === 'all' || category === catVal);
 
@@ -402,15 +370,9 @@
             noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        function playStream(url, name, desc) {
-            var playerBox = document.getElementById('player-box');
-            var target = document.getElementById('video-target');
-            
-            document.getElementById('current-playing-title').innerText = name;
-            document.getElementById('current-playing-desc').innerText = desc;
-            
-            playerBox.style.display = 'block';
-            target.innerHTML = ""; 
+        // Core Stream Initializer
+        function initClappr(url) {
+            if (playerInstance) { playerInstance.destroy(); }
             
             playerInstance = new Clappr.Player({
                 source: url,
@@ -422,25 +384,61 @@
                 mute: false,
                 playback: {
                     hlsjsConfig: {
-                        manifestLoadingTimeOut: 20000, 
-                        manifestLoadingMaxRetry: 5,
-                        levelLoadingTimeOut: 20000
+                        manifestLoadingTimeOut: 8000, 
+                        manifestLoadingMaxRetry: 2,
+                        levelLoadingTimeOut: 8000
                     }
                 }
             });
+        }
 
+        // 5-Links Fallback Engine for Andromeda
+        function playMultiRoute(urlArray, name, desc) {
+            var playerBox = document.getElementById('player-box');
+            document.getElementById('current-playing-title').innerText = name;
+            document.getElementById('current-playing-desc').innerText = desc + " (Connecting Multi-Route...)";
+            playerBox.style.display = 'block';
+            
+            var currentIdx = 0;
+
+            function tryNextRoute() {
+                if (currentIdx >= urlArray.length) {
+                    document.getElementById('current-playing-desc').innerText = "Error: All 5 links are currently down. Please update the stream feed.";
+                    return;
+                }
+                
+                var targetUrl = urlArray[currentIdx];
+                document.getElementById('current-playing-desc').innerText = desc + " (Trying Stream Route " + (currentIdx + 1) + "/5...)";
+                
+                initClappr(targetUrl);
+
+                // Listen for player network errors to jump instantly to next link
+                playerInstance.on(Clappr.Events.PLAYER_ERROR, function() {
+                    currentIdx++;
+                    tryNextRoute();
+                });
+            }
+
+            tryNextRoute();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Single Stream Play Logic
+        function playSingleRoute(url, name, desc) {
+            var playerBox = document.getElementById('player-box');
+            document.getElementById('current-playing-title').innerText = name;
+            document.getElementById('current-playing-desc').innerText = desc;
+            playerBox.style.display = 'block';
+            
+            initClappr(url);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function closeStream() {
             var playerBox = document.getElementById('player-box');
             document.getElementById('current-playing-title').innerText = "Premium IPTV Dashboard";
-            document.getElementById('current-playing-desc').innerText = "Select a live working channel below. Powered by Clappr Timeout Bypass Engine.";
-            
-            if (playerInstance) {
-                playerInstance.destroy();
-                playerInstance = null;
-            }
+            document.getElementById('current-playing-desc').innerText = "Select a live working channel below. Powered by Multi-Route Fallback System.";
+            if (playerInstance) { playerInstance.destroy(); playerInstance = null; }
             playerBox.style.display = 'none';
         }
     </script>
