@@ -309,8 +309,8 @@
         <div class="channels-grid">
             <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
 
-            <!-- MLS Live YouTube Channel -->
-            <div class="channel-card" data-name="mls live football sports youtube" data-category="sports" onclick="playYouTube('live', 'MLS Live Match', 'Major League Soccer - Live YouTube Broadcast')">
+            <!-- MLS Live Fixed YouTube Channel -->
+            <div class="channel-card" data-name="mls live football sports youtube" data-category="sports" onclick="playYouTube('kJq09z0N-Fw', 'MLS Live Match', 'Major League Soccer - Direct YouTube Embed Stream')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
                     <img src="https://placehold.co/600x400/0f172a/ffffff?text=MLS+LIVE" alt="MLS Live">
@@ -400,8 +400,8 @@
             });
         }
 
-        // YouTube Embedding Logic
-        function playYouTube(videoType, name, desc) {
+        // Fixed YouTube Play Engine
+        function playYouTube(videoId, name, desc) {
             var playerBox = document.getElementById('player-box');
             var target = document.getElementById('video-target');
             
@@ -414,8 +414,8 @@
             }
             playerInstance = "youtube";
 
-            // আপনি যে নির্দিষ্ট লাইভ ভিডিওটি দেখাতে চান তার ID এখানে বসাতে পারেন। বর্তমানে এটি সার্চ রেজাল্ট লাইভ মোডে রাখা।
-            target.innerHTML = '<iframe src="https://www.youtube.com/embed?listType=search&list=MLS+Live+Match+Now" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+            // Direct fixed player link
+            target.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
