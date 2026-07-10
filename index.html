@@ -33,7 +33,7 @@
             background-color: var(--bg-base);
             color: var(--text-main);
             overflow-x: hidden;
-            overflow-y: hidden; /* Dynamic lock for intro */
+            overflow-y: hidden; /* Lock scroll during intro */
         }
 
         /* ================= 3D INTRO ANIMATION PRELOADER ================= */
@@ -285,8 +285,8 @@
         /* OTT Style Card Layout */
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
         }
 
         .stream-card {
@@ -307,7 +307,7 @@
 
         .card-banner {
             width: 100%;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 16 / 10;
             background: linear-gradient(45deg, #1e1b4b 0%, #030712 100%);
             display: flex;
             justify-content: center;
@@ -316,7 +316,7 @@
         }
 
         .card-banner i {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: rgba(255, 255, 255, 0.15);
             transition: color 0.3s;
         }
@@ -361,14 +361,14 @@
         }
 
         .card-meta {
-            padding: 20px;
+            padding: 15px 20px;
             background: linear-gradient(to top, var(--bg-surface) 80%, transparent 100%);
         }
 
         .card-headline {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             letter-spacing: -0.3px;
         }
 
@@ -403,7 +403,7 @@
         <a href="#" class="brand-text">Till Infinity</a>
         <ul class="nav-links">
             <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="#" onclick="alert('Live Channels Engine Connected!')"><i class="fa-solid fa-tv"></i> Streams</a></li>
+            <li><a href="#" onclick="alert('Network Operations System Engine Connected!')"><i class="fa-solid fa-tv"></i> Streams</a></li>
             <li><a href="#" class="btn-premium"><i class="fa-solid fa-crown"></i> Ultra Fast</a></li>
         </ul>
     </header>
@@ -431,35 +431,116 @@
                 <select id="grid-filter" onchange="runFilterEngine()">
                     <option value="all">All Genres</option>
                     <option value="bangla">Bangla Networks</option>
+                    <option value="news">News Channels</option>
                     <option value="sports">Sports Systems</option>
                 </select>
             </div>
         </div>
 
         <div class="media-grid">
-            <!-- Channel 1: Anonda TV -->
-            <div class="stream-card" data-genre="bangla" onclick="bootMultiStream(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anonda TV', 'Bangla Regional Entertainment & Real-time Live News Hub')">
-                <div class="card-banner">
-                    <div class="live-indicator">Live Feed</div>
-                    <i class="fa-solid fa-satellite-dish"></i>
-                </div>
-                <div class="card-meta">
-                    <div class="card-headline">Anonda TV</div>
-                    <div class="card-subtext"><span><i class="fa-solid fa-language"></i> Bangla</span> • <span>Multi-Route Ready</span></div>
-                </div>
+
+            <!-- 1. Anonda TV -->
+            <div class="stream-card" data-genre="bangla" onclick="bootMultiStream(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anonda TV', 'Bangla Regional Entertainment')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tv"></i></div>
+                <div class="card-meta"><div class="card-headline">Anonda TV</div><div class="card-subtext">Bangla • Live</div></div>
             </div>
 
-            <!-- Channel 2: Red Bull TV -->
-            <div class="stream-card" data-genre="sports" onclick="bootSingleStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull TV', 'Global Extreme Sports, Action Events & Live Racing Operations')">
-                <div class="card-banner">
-                    <div class="live-indicator">Live HD</div>
-                    <i class="fa-solid fa-bolt" style="color: #ffaa00;"></i>
-                </div>
-                <div class="card-meta">
-                    <div class="card-headline">Red Bull TV</div>
-                    <div class="card-subtext"><span><i class="fa-solid fa-trophy"></i> Sports</span> • <span>1080p Ultra HD</span></div>
-                </div>
+            <!-- 2. ATN News (Multi-Link) -->
+            <div class="stream-card" data-genre="news" onclick="bootMultiStream(['https://bozztv.com/rongo/rongo-ATNNews/index.m3u8', 'https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/1706.m3u8'], 'ATN News', '24/7 Bengali News Broadcast')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-newspaper"></i></div>
+                <div class="card-meta"><div class="card-headline">ATN News</div><div class="card-subtext">News • Multi-Route</div></div>
             </div>
+
+            <!-- 3. Boishakhi TV -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8', 'Boishakhi TV', 'Boishakhi Mass Entertainment')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-circle-play"></i></div>
+                <div class="card-meta"><div class="card-headline">Boishakhi TV</div><div class="card-subtext">Bangla • Network</div></div>
+            </div>
+
+            <!-- 4. BTV Chattogram -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://bozztv.com/rongo/rongo-BTVChattagram/index.m3u8', 'BTV Chattogram', 'BTV Regional Network Station')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-satellite-dish"></i></div>
+                <div class="card-meta"><div class="card-headline">BTV Chattogram</div><div class="card-subtext">Bangla • Regional</div></div>
+            </div>
+
+            <!-- 5. BTV World (Multi-Link) -->
+            <div class="stream-card" data-genre="bangla" onclick="bootMultiStream(['https://tvsen6.aynaott.com/btv_world/index.m3u8', 'https://tvsen6.aynaott.com/btv_world/index.m3u8'], 'BTV World', 'National State Satellite Feed')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-globe"></i></div>
+                <div class="card-meta"><div class="card-headline">BTV World</div><div class="card-subtext">Bangla • Global</div></div>
+            </div>
+
+            <!-- 6. Channel 9 -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1729/output/index.m3u8', 'Channel 9', 'Infotainment and Entertainment')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tv"></i></div>
+                <div class="card-meta"><div class="card-headline">Channel 9</div><div class="card-subtext">Bangla • HD</div></div>
+            </div>
+
+            <!-- 7. Channel 24 -->
+            <div class="stream-card" data-genre="news" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/index.m3u8', 'Channel 24', 'Interactive Current Affairs and News')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-clock"></i></div>
+                <div class="card-meta"><div class="card-headline">Channel 24</div><div class="card-subtext">News • 24 Hours</div></div>
+            </div>
+
+            <!-- 8. Channel I -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1723/output/index.m3u8', 'Channel I', 'Premium Bengali Cultural Broadcast')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-display"></i></div>
+                <div class="card-meta"><div class="card-headline">Channel I</div><div class="card-subtext">Bangla • Premium</div></div>
+            </div>
+
+            <!-- 9. Channel S -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8', 'Channel S', 'UK & Local Bengali Streaming Info')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tower-broadcast"></i></div>
+                <div class="card-meta"><div class="card-headline">Channel S</div><div class="card-subtext">Bangla • Feed</div></div>
+            </div>
+
+            <!-- 10. DBC News -->
+            <div class="stream-card" data-genre="news" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8', 'DBC News', 'DBC Live Satellite Breaking Feed')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-bullhorn"></i></div>
+                <div class="card-meta"><div class="card-headline">DBC News</div><div class="card-subtext">News • HD Stream</div></div>
+            </div>
+
+            <!-- 11. Deepto TV -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1711/output/index.m3u8', 'Deepto TV', 'Serials, Dramas and Entertainment')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-masks-theater"></i></div>
+                <div class="card-meta"><div class="card-headline">Deepto TV</div><div class="card-subtext">Bangla • Mega</div></div>
+            </div>
+
+            <!-- 12. Desh TV -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://bozztv.com/rongo/rongo-DeshTV/index.m3u8', 'Desh TV', 'National Bengali Cultural Programs')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-flag"></i></div>
+                <div class="card-meta"><div class="card-headline">Desh TV</div><div class="card-subtext">Bangla • Network</div></div>
+            </div>
+
+            <!-- 13. Ekattor TV -->
+            <div class="stream-card" data-genre="news" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/1705.m3u8', 'Ekattor TV', 'First Journalistic Live Station')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-video"></i></div>
+                <div class="card-meta"><div class="card-headline">Ekattor TV</div><div class="card-subtext">News • Journal</div></div>
+            </div>
+
+            <!-- 14. Ekushey TV -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://ekusheyserver.com/etvlivesn.m3u8', 'Ekushey TV', 'Voice of the Nation Broadcast')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-microphone"></i></div>
+                <div class="card-meta"><div class="card-headline">Ekushey TV</div><div class="card-subtext">Bangla • Core</div></div>
+            </div>
+
+            <!-- 15. Gazi TV -->
+            <div class="stream-card" data-genre="sports" onclick="bootSingleStream('https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8', 'Gazi TV', 'Premium Bengali Cricket & Entertainment Stream')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-baseball"></i></div>
+                <div class="card-meta"><div class="card-headline">Gazi TV (GTV)</div><div class="card-subtext">Sports • Premium</div></div>
+            </div>
+
+            <!-- 16. Green TV -->
+            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/live-orgin/greentv.stream/playlist.m3u8', 'Green TV', 'Modern Lifestyle and News Feed')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-leaf"></i></div>
+                <div class="card-meta"><div class="card-headline">Green TV</div><div class="card-subtext">Bangla • Family</div></div>
+            </div>
+
+            <!-- 17. Red Bull TV -->
+            <div class="stream-card" data-genre="sports" onclick="bootSingleStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull TV', 'Extreme Sports Systems & Racing Operations')">
+                <div class="card-banner"><div class="live-indicator">Live HD</div><i class="fa-solid fa-bolt" style="color: #ffaa00;"></i></div>
+                <div class="card-meta"><div class="card-headline">Red Bull TV</div><div class="card-subtext">Sports • 1080p Ultra HD</div></div>
+            </div>
+
         </div>
     </main>
 
@@ -511,6 +592,8 @@
         function bootMultiStream(routeArray, title, desc) {
             document.getElementById('idle-core').style.display = 'none';
             document.getElementById('theater-shell').style.display = 'block';
+            document.getElementById('panel-title').innerText = title;
+            document.getElementById('panel-desc').innerText = desc;
             
             var currentRouteIdx = 0;
             var isProxyTriggered = false;
@@ -546,6 +629,8 @@
         function bootSingleStream(url, title, desc) {
             document.getElementById('idle-core').style.display = 'none';
             document.getElementById('theater-shell').style.display = 'block';
+            document.getElementById('panel-title').innerText = title;
+            document.getElementById('panel-desc').innerText = desc;
             mountPlayer(url);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
