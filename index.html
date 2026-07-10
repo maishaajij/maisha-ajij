@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Till Infinity Play - Premium IPTV Experience</title>
     
     <!-- Premium Fonts & Icons -->
@@ -27,16 +27,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--bg-base);
             color: var(--text-main);
             overflow-x: hidden;
-            overflow-y: hidden; /* Lock scroll during intro */
+            overflow-y: hidden; /* Lock scroll during intro animation */
         }
 
-        /* ================= 3D INTRO ANIMATION PRELOADER ================= */
+        /* ================= 3D INTRO ANIMATION PRELOADER (RESPONSIVE) ================= */
         #intro-loader {
             position: fixed;
             top: 0;
@@ -51,6 +52,7 @@
             flex-direction: column;
             perspective: 1000px;
             transition: opacity 0.8s ease-out, visibility 0.8s;
+            padding: 20px;
         }
 
         .intro-title {
@@ -60,6 +62,7 @@
             color: #ffffff;
             letter-spacing: 6px;
             text-transform: uppercase;
+            text-align: center;
             text-shadow: 
                 0 1px 0 #ccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0,
                 0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1),
@@ -78,6 +81,7 @@
             text-transform: uppercase;
             margin-top: 15px;
             opacity: 0;
+            text-align: center;
             animation: fadeInSub 1.5s ease 1s forwards;
         }
 
@@ -91,6 +95,12 @@
             to { opacity: 1; }
         }
 
+        /* Mobile specific adjustments for intro */
+        @media (max-width: 768px) {
+            .intro-title { font-size: 2.2rem; letter-spacing: 3px; }
+            .intro-sub { font-size: 0.75rem; letter-spacing: 2px; }
+        }
+
         /* ================= PREMIUM HEADER & NAVIGATION ================= */
         header {
             display: flex;
@@ -99,6 +109,7 @@
             padding: 18px 6%;
             background: rgba(3, 7, 18, 0.85);
             backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             position: fixed;
             top: 0;
             left: 0;
@@ -123,7 +134,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 20px;
             align-items: center;
         }
 
@@ -140,28 +151,44 @@
 
         .nav-links a:hover, .nav-links a.active {
             color: var(--text-main);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
         .btn-premium {
             background: linear-gradient(135deg, #ff2a5f 0%, #b0003a 100%);
             color: white !important;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 20px;
+            font-size: 0.8rem !important;
             box-shadow: 0 4px 15px var(--accent-glow);
         }
 
-        /* ================= CINEMATIC HERO PLAYER ================= */
+        @media (max-width: 768px) {
+            header { padding: 14px 4%; }
+            .brand-text { font-size: 1.15rem; letter-spacing: 1px; }
+            .nav-links { gap: 12px; }
+            .nav-links a span { display: none; } /* Hide text names on mobile icons to save space */
+            .btn-premium { padding: 5px 12px; }
+        }
+
+        /* ================= CINEMATIC RESPONSIVE HERO PLAYER ================= */
         .hero-theater {
             margin-top: 75px;
             width: 100%;
-            height: 60vh;
+            height: 55vh;
             background: #000;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 -50px 100px var(--bg-base);
+            box-shadow: inset 0 -30px 60px var(--bg-base);
+        }
+
+        @media (max-width: 768px) {
+            .hero-theater {
+                margin-top: 60px;
+                height: auto;
+                aspect-ratio: 16 / 9; /* Perfect Fluid Mobile Aspect Ratio */
+            }
         }
 
         .ambient-glow {
@@ -183,7 +210,7 @@
         }
 
         .theater-placeholder h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 12px;
             letter-spacing: -0.5px;
@@ -193,6 +220,11 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .theater-placeholder h1 { font-size: 1.25rem; margin-bottom: 6px; }
+            .theater-placeholder p { font-size: 0.75rem; line-height: 1.4; padding: 0 10px; }
         }
 
         .video-box {
@@ -213,44 +245,48 @@
 
         .control-panel {
             position: absolute;
-            top: 25px;
-            right: 25px;
+            top: 15px;
+            right: 15px;
             z-index: 20;
         }
 
         .btn-close {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 10px 18px;
+            padding: 8px 14px;
             border-radius: 30px;
             cursor: pointer;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             transition: all 0.2s;
         }
 
         .btn-close:hover {
             background: var(--accent);
-            box-shadow: 0 0 15px var(--accent);
             border-color: transparent;
         }
 
         /* ================= MODERN MEDIA DASHBOARD ================= */
         .dashboard-container {
-            padding: 40px 6%;
+            padding: 30px 6%;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container { padding: 20px 4%; }
         }
 
         .filter-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .section-headline {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -259,39 +295,46 @@
 
         .section-headline span {
             width: 4px;
-            height: 22px;
+            height: 20px;
             background: var(--accent);
             border-radius: 2px;
             display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .section-headline { font-size: 1rem; }
+            .section-headline span { height: 16px; }
         }
 
         .custom-dropdown select {
             background: var(--bg-surface);
             color: var(--text-main);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 30px;
             outline: none;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            transition: border 0.3s;
         }
 
-        .custom-dropdown select:focus {
-            border-color: var(--accent);
-        }
-
-        /* OTT Style Card Layout */
+        /* OTT Premium Dual Column Layout for Android/Mobile */
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 Compact Cards Side-by-Side on Mobile */
+                gap: 12px;
+            }
         }
 
         .stream-card {
             background: var(--bg-surface);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.02);
@@ -300,9 +343,8 @@
         }
 
         .stream-card:hover {
-            transform: scale(1.03) translateY(-5px);
+            transform: scale(1.02);
             border-color: rgba(255, 42, 95, 0.3);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 42, 95, 0.1);
         }
 
         .card-banner {
@@ -316,77 +358,60 @@
         }
 
         .card-banner i {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: rgba(255, 255, 255, 0.15);
-            transition: color 0.3s;
         }
 
-        .stream-card:hover .card-banner i {
-            color: var(--accent);
-            transform: scale(1.1);
+        @media (max-width: 768px) {
+            .card-banner i { font-size: 1.5rem; }
         }
 
         .live-indicator {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(239, 68, 68, 0.2);
+            top: 10px;
+            left: 10px;
+            background: rgba(239, 68, 68, 0.25);
             border: 1px solid #ef4444;
             color: #ef4444;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
-            padding: 3px 10px;
+            padding: 2px 8px;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .live-indicator::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: #ef4444;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.4; }
-            100% { transform: scale(0.9); opacity: 1; }
         }
 
         .card-meta {
-            padding: 15px 20px;
-            background: linear-gradient(to top, var(--bg-surface) 80%, transparent 100%);
+            padding: 12px 14px;
+            background: var(--bg-surface);
         }
 
         .card-headline {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: -0.3px;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Prevent multi-line break breaking layout */
         }
 
         .card-subtext {
             color: var(--text-muted);
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-meta { padding: 8px 10px; }
+            .card-headline { font-size: 0.85rem; }
+            .card-subtext { font-size: 0.7rem; }
         }
 
         footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 30px 0;
             color: #475569;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             border-top: 1px solid rgba(255, 255, 255, 0.03);
-            margin-top: 60px;
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -402,9 +427,9 @@
     <header>
         <a href="#" class="brand-text">Till Infinity</a>
         <ul class="nav-links">
-            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="#" onclick="alert('Network Operations System Engine Connected!')"><i class="fa-solid fa-tv"></i> Streams</a></li>
-            <li><a href="#" class="btn-premium"><i class="fa-solid fa-crown"></i> Ultra Fast</a></li>
+            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
+            <li><a href="#" onclick="alert('Network Operations Engine Connected!')"><i class="fa-solid fa-tv"></i> <span>Streams</span></a></li>
+            <li><a href="#" class="btn-premium"><i class="fa-solid fa-crown"></i> <span>Ultra</span></a></li>
         </ul>
     </header>
 
@@ -413,26 +438,26 @@
         <div class="ambient-glow"></div>
         <div class="video-box" id="theater-shell">
             <div class="control-panel">
-                <button class="btn-close" onclick="shutdownStream()"><i class="fa-solid fa-xmark"></i> Close Theater</button>
+                <button class="btn-close" onclick="shutdownStream()"><i class="fa-solid fa-xmark"></i> Close</button>
             </div>
             <div id="player-canvas"></div>
         </div>
         <div class="theater-placeholder" id="idle-core">
-            <h1 id="panel-title">Cinema Network Engine</h1>
-            <p id="panel-desc">Select an authorized ultra-high-speed channel grid below to process and render live feeds instantly.</p>
+            <h1 id="panel-title">Cinema Engine</h1>
+            <p id="panel-desc">Select an authorized ultra-high-speed channel below to process live feeds instantly.</p>
         </div>
     </section>
 
     <!-- ================= MAIN PLATFORM GRID ================= -->
     <main class="dashboard-container">
         <div class="filter-row">
-            <h2 class="section-headline"><span></span>Live Broadcast Feeds</h2>
+            <h2 class="section-headline"><span></span>Live Broadcasts</h2>
             <div class="custom-dropdown">
                 <select id="grid-filter" onchange="runFilterEngine()">
                     <option value="all">All Genres</option>
-                    <option value="bangla">Bangla Networks</option>
-                    <option value="news">News Channels</option>
-                    <option value="sports">Sports Systems</option>
+                    <option value="bangla">Bangla</option>
+                    <option value="news">News</option>
+                    <option value="sports">Sports</option>
                 </select>
             </div>
         </div>
@@ -445,7 +470,7 @@
                 <div class="card-meta"><div class="card-headline">Anonda TV</div><div class="card-subtext">Bangla • Live</div></div>
             </div>
 
-            <!-- 2. ATN News (Multi-Link) -->
+            <!-- 2. ATN News -->
             <div class="stream-card" data-genre="news" onclick="bootMultiStream(['https://bozztv.com/rongo/rongo-ATNNews/index.m3u8', 'https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/1706.m3u8'], 'ATN News', '24/7 Bengali News Broadcast')">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-newspaper"></i></div>
                 <div class="card-meta"><div class="card-headline">ATN News</div><div class="card-subtext">News • Multi-Route</div></div>
@@ -463,7 +488,7 @@
                 <div class="card-meta"><div class="card-headline">BTV Chattogram</div><div class="card-subtext">Bangla • Regional</div></div>
             </div>
 
-            <!-- 5. BTV World (Multi-Link) -->
+            <!-- 5. BTV World -->
             <div class="stream-card" data-genre="bangla" onclick="bootMultiStream(['https://tvsen6.aynaott.com/btv_world/index.m3u8', 'https://tvsen6.aynaott.com/btv_world/index.m3u8'], 'BTV World', 'National State Satellite Feed')">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-globe"></i></div>
                 <div class="card-meta"><div class="card-headline">BTV World</div><div class="card-subtext">Bangla • Global</div></div>
@@ -544,7 +569,7 @@
         </div>
     </main>
 
-    <footer>&copy; 2026 Till Infinity Network. Optimized for Next-Gen Browsers.</footer>
+    <footer>&copy; 2026 Till Infinity Network. Optimized for Next-Gen Mobile & Desktop Browsers.</footer>
 
     <script>
         var clapprCore = null;
@@ -556,7 +581,7 @@
                 const loader = document.getElementById('intro-loader');
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-                document.body.style.overflowY = 'auto'; // Unlock scroll
+                document.body.style.overflowY = 'auto'; // Unlock scroll once loaded
             }, 3200); // 3.2 Seconds Premium Cinema Animation View
         });
 
@@ -608,7 +633,7 @@
                         var ph = document.getElementById('idle-core');
                         ph.style.display = 'block';
                         document.getElementById('panel-title').innerText = "Stream Offline";
-                        document.getElementById('panel-desc').innerText = "All link nodes for this channel returned error codes. Token Expired.";
+                        document.getElementById('panel-desc').innerText = "All link nodes returned error codes.";
                         return;
                     }
                 }
@@ -640,8 +665,8 @@
             document.getElementById('theater-shell').style.display = 'none';
             var ph = document.getElementById('idle-core');
             ph.style.display = 'block';
-            document.getElementById('panel-title').innerText = "Cinema Network Engine";
-            document.getElementById('panel-desc').innerText = "Select an authorized ultra-high-speed channel grid below to process and render live feeds instantly.";
+            document.getElementById('panel-title').innerText = "Cinema Engine";
+            document.getElementById('panel-desc').innerText = "Select an authorized ultra-high-speed channel below to process live feeds instantly.";
         }
     </script>
 </body>
