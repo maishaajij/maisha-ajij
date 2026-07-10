@@ -88,6 +88,12 @@
             height: 100%;
         }
 
+        #video-target iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         .hero-content {
             max-width: 600px;
             position: relative;
@@ -303,7 +309,19 @@
         <div class="channels-grid">
             <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
 
-            <!-- New Andromeda Channel (With Images & Multi-links Fallback) -->
+            <!-- MLS Live YouTube Channel -->
+            <div class="channel-card" data-name="mls live football sports youtube" data-category="sports" onclick="playYouTube('live', 'MLS Live Match', 'Major League Soccer - Live YouTube Broadcast')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/0f172a/ffffff?text=MLS+LIVE" alt="MLS Live">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">MLS Live (YouTube)</div>
+                    <div class="channel-category">Sports</div>
+                </div>
+            </div>
+
+            <!-- Andromeda Channel (Multi-links Fallback) -->
             <div class="channel-card" data-name="andromeda entertainment" data-category="entertainment" onclick="playMultiRoute(['https://jmp2.uk/plu-663a163f8ea5560008a3f234.m3u8', 'https://jmp2.uk/plu-6177fb39b68ef1000725e59e.m3u8', 'https://jmp2.uk/plu-617807a1a3a6160007f615e4.m3u8', 'https://jmp2.uk/plu-6178156e54712100072d6b2b.m3u8', 'https://jmp2.uk/plu-6850335b5965a2fd49f7e36d.m3u8'], 'Andromeda', 'Premium Movie & Entertainment Network')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
@@ -323,18 +341,6 @@
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">Red Bull Sports TV</div>
-                    <div class="channel-category">Sports</div>
-                </div>
-            </div>
-
-            <!-- CAZE TV (Bypassed Proxy Added) -->
-            <div class="channel-card" data-name="caze tv" data-category="sports" onclick="playSingleRoute('https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8', 'CAZE TV', 'International Sports Broadcast')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=CAZE+TV" alt="CAZE TV">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">CAZE TV</div>
                     <div class="channel-category">Sports</div>
                 </div>
             </div>
@@ -370,9 +376,11 @@
             noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        // Core Stream Initializer
         function initClappr(url) {
-            if (playerInstance) { playerInstance.destroy(); }
+            if (playerInstance) { 
+                if(typeof playerInstance.destroy === 'function') { playerInstance.destroy(); }
+                playerInstance = null;
+            }
             
             playerInstance = new Clappr.Player({
                 source: url,
@@ -392,27 +400,45 @@
             });
         }
 
-        // 5-Links Fallback Engine for Andromeda
+        // YouTube Embedding Logic
+        function playYouTube(videoType, name, desc) {
+            var playerBox = document.getElementById('player-box');
+            var target = document.getElementById('video-target');
+            
+            document.getElementById('current-playing-title').innerText = name;
+            document.getElementById('current-playing-desc').innerText = desc;
+            playerBox.style.display = 'block';
+
+            if (playerInstance && typeof playerInstance.destroy === 'function') {
+                playerInstance.destroy();
+            }
+            playerInstance = "youtube";
+
+            // আপনি যে নির্দিষ্ট লাইভ ভিডিওটি দেখাতে চান তার ID এখানে বসাতে পারেন। বর্তমানে এটি সার্চ রেজাল্ট লাইভ মোডে রাখা।
+            target.innerHTML = '<iframe src="https://www.youtube.com/embed?listType=search&list=MLS+Live+Match+Now" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function playMultiRoute(urlArray, name, desc) {
             var playerBox = document.getElementById('player-box');
             document.getElementById('current-playing-title').innerText = name;
-            document.getElementById('current-playing-desc').innerText = desc + " (Connecting Multi-Route...)";
             playerBox.style.display = 'block';
+            document.getElementById('video-target').innerHTML = "";
             
             var currentIdx = 0;
 
             function tryNextRoute() {
                 if (currentIdx >= urlArray.length) {
-                    document.getElementById('current-playing-desc').innerText = "Error: All 5 links are currently down. Please update the stream feed.";
+                    document.getElementById('current-playing-desc').innerText = "Error: All 5 links are currently down.";
                     return;
                 }
                 
                 var targetUrl = urlArray[currentIdx];
-                document.getElementById('current-playing-desc').innerText = desc + " (Trying Stream Route " + (currentIdx + 1) + "/5...)";
+                document.getElementById('current-playing-desc').innerText = desc + " (Trying Route " + (currentIdx + 1) + "/5...)";
                 
                 initClappr(targetUrl);
 
-                // Listen for player network errors to jump instantly to next link
                 playerInstance.on(Clappr.Events.PLAYER_ERROR, function() {
                     currentIdx++;
                     tryNextRoute();
@@ -423,12 +449,12 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Single Stream Play Logic
         function playSingleRoute(url, name, desc) {
             var playerBox = document.getElementById('player-box');
             document.getElementById('current-playing-title').innerText = name;
             document.getElementById('current-playing-desc').innerText = desc;
             playerBox.style.display = 'block';
+            document.getElementById('video-target').innerHTML = "";
             
             initClappr(url);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -437,8 +463,13 @@
         function closeStream() {
             var playerBox = document.getElementById('player-box');
             document.getElementById('current-playing-title').innerText = "Premium IPTV Dashboard";
-            document.getElementById('current-playing-desc').innerText = "Select a live working channel below. Powered by Multi-Route Fallback System.";
-            if (playerInstance) { playerInstance.destroy(); playerInstance = null; }
+            document.getElementById('current-playing-desc').innerText = "Select a live working channel below.";
+            
+            if (playerInstance && typeof playerInstance.destroy === 'function') { 
+                playerInstance.destroy(); 
+            }
+            playerInstance = null;
+            document.getElementById('video-target').innerHTML = "";
             playerBox.style.display = 'none';
         }
     </script>
