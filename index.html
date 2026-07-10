@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Till Infinity Play - Premium IPTV Experience</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@600;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Clappr Video Engine -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
     
     <style>
@@ -32,10 +34,10 @@
             background-color: var(--bg-base);
             color: var(--text-main);
             overflow-x: hidden;
-            overflow-y: hidden; /* Lock scroll during intro animation */
+            overflow-y: hidden; /* Lock scroll during intro */
         }
 
-        /* ================= PREMIUM 3D INTRO ANIMATION PRELOADER (ANDROID EXPERT) ================= */
+        /* ================= PREMIUM 3D INTRO ANIMATION ================= */
         #intro-loader {
             position: fixed;
             top: 0;
@@ -54,26 +56,24 @@
         }
 
         .intro-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.6rem;
+            font-weight: 900;
             color: #ffffff;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             text-align: center;
-            text-shadow: 
-                0 1px 0 #bbb, 0 2px 0 #aaa, 0 3px 0 #999,
-                0 5px 15px rgba(0,0,0,0.5),
-                0 0 20px var(--accent), 0 0 40px var(--accent);
+            text-shadow: 0 0 15px var(--accent), 0 0 35px var(--accent), 0 0 60px rgba(255,42,95,0.8);
             animation: intro3DAndro 2.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             opacity: 0;
             transform: translateZ(-300px) rotateX(45deg);
         }
 
         .intro-sub {
+            font-family: 'Orbitron', sans-serif;
             color: var(--text-muted);
-            font-size: 0.8rem;
-            letter-spacing: 3px;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
             margin-top: 20px;
             opacity: 0;
@@ -87,16 +87,9 @@
             100% { transform: translateZ(0px) rotateX(0deg); opacity: 1; }
         }
 
-        @keyframes fadeInSubAndro {
-            to { opacity: 1; }
-        }
+        @keyframes fadeInSubAndro { to { opacity: 1; } }
 
-        @media (max-width: 480px) {
-            .intro-title { font-size: 2rem; letter-spacing: 2px; }
-            .intro-sub { font-size: 0.7rem; letter-spacing: 2px; }
-        }
-
-        /* ================= PREMIUM HEADER & NAVIGATION ================= */
+        /* ================= HEADER & GORGEOUS LOGO ================= */
         header {
             display: flex;
             justify-content: space-between;
@@ -113,54 +106,60 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .menu-trigger { font-size: 1.25rem; color: var(--text-main); cursor: pointer; padding: 4px; transition: color 0.2s; }
+        .menu-trigger:active { color: var(--accent); }
+
         .brand-text {
-            font-family: 'Cinzel', serif;
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.35rem;
+            font-weight: 900;
             letter-spacing: 1px;
-            color: #ffffff;
             text-decoration: none;
-            background: linear-gradient(to right, #fff 30%, var(--accent) 100%);
+            background: linear-gradient(45deg, #ffffff 20%, #ff7ea0 60%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 42, 95, 0.25);
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 15px;
-            align-items: center;
-        }
+        .nav-links { display: flex; list-style: none; gap: 15px; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        .nav-links a.active { color: var(--text-main); }
+        .btn-premium { background: linear-gradient(135deg, #ff2a5f 0%, #b0003a 100%); color: white !important; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem !important; box-shadow: 0 4px 12px var(--accent-glow); }
 
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        @media (max-width: 768px) { .nav-links a span { display: none; } }
 
-        .nav-links a.active {
-            color: var(--text-main);
+        /* ================= SIDE MENU (DRAWER) ================= */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: #060b18;
+            z-index: 2000;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.6);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 25px 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
         }
+        .side-menu.open { left: 0; }
+        .menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .menu-close { font-size: 1.3rem; color: var(--text-muted); cursor: pointer; padding: 4px; }
 
-        .btn-premium {
-            background: linear-gradient(135deg, #ff2a5f 0%, #b0003a 100%);
-            color: white !important;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem !important;
-            box-shadow: 0 4px 12px var(--accent-glow);
-        }
+        .profile-box { background: var(--bg-surface); padding: 18px 15px; border-radius: 12px; margin-bottom: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.02); }
+        .profile-box i { font-size: 2.2rem; color: var(--accent); margin-bottom: 8px; }
+        .profile-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; }
+        .btn-auth { display: inline-block; width: 100%; padding: 9px; border-radius: 8px; border: none; font-weight: 700; font-size: 0.8rem; cursor: pointer; } 
+        .btn-login { background: var(--accent); color: white; }
+        .btn-logout { background: #1e293b; color: #ef4444; display: none; }
 
-        @media (max-width: 768px) {
-            header { padding: 12px 4%; }
-            .nav-links a span { display: none; } /* Mobile icons only to maximize space */
-        }
+        .menu-links { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .menu-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 6px; }
+        .menu-links a:active, .menu-links a.active { color: var(--accent); background: rgba(255, 42, 95, 0.05); }
+        .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.55); z-index: 1999; display: none; backdrop-filter: blur(4px); }
 
-        /* ================= CINEMATIC HERO PLAYER (16:9 RESPONSIVE) ================= */
+        /* ================= CINEMATIC HERO PLAYER ================= */
         .hero-theater {
             margin-top: 55px;
             width: 100%;
@@ -169,105 +168,72 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            aspect-ratio: 16 / 9; /* Perfect Dynamic Ratio on Mobile & Android */
-            box-shadow: inset 0 -20px 40px var(--bg-base);
+            aspect-ratio: 16 / 9;
         }
 
-        .ambient-glow {
+        .ambient-glow { position: absolute; width: 50%; height: 50%; background: var(--accent); filter: blur(100px); opacity: 0.15; pointer-events: none; z-index: 1; }
+        .theater-placeholder { text-align: center; max-width: 90%; z-index: 2; padding: 10px; }
+        .theater-placeholder h1 { font-family: 'Orbitron', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; color: #fff; }
+        .theater-placeholder p { color: var(--text-muted); font-size: 0.75rem; }
+
+        .video-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; display: none; background: #000; }
+        #player-canvas { width: 100%; height: 100%; }
+
+        .control-panel { position: absolute; top: 10px; right: 10px; z-index: 20; display: flex; gap: 8px; }
+        .btn-control { background: rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; backdrop-filter: blur(8px); font-weight: 600; font-size: 0.7rem; }
+        .btn-close { border-color: rgba(239, 68, 68, 0.4); color: #ef4444; }
+
+        /* ================= USEFUL CONTROL UTILITIES ================= */
+        .utility-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-wrapper i {
             position: absolute;
-            width: 50%;
-            height: 50%;
-            background: var(--accent);
-            filter: blur(100px);
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .theater-placeholder {
-            text-align: center;
-            max-width: 90%;
-            z-index: 2;
-            padding: 10px;
-        }
-
-        .theater-placeholder h1 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: -0.2px;
-            color: #fff;
-        }
-
-        .theater-placeholder p {
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
             color: var(--text-muted);
-            font-size: 0.75rem;
-            line-height: 1.4;
+            font-size: 0.85rem;
         }
 
-        .video-box {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .search-input {
             width: 100%;
-            height: 100%;
-            z-index: 10;
-            display: none;
-            background: #000;
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 14px 10px 38px;
+            border-radius: 25px;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
         }
 
-        #player-canvas {
-            width: 100%;
-            height: 100%;
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(255, 42, 95, 0.2);
         }
 
-        .control-panel {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 20;
-        }
-
-        .btn-close {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            font-weight: 600;
-            font-size: 0.7rem;
-        }
-
-        /* ================= DYNAMIC GRID (2 COLUMNS APP STYLE) ================= */
-        .dashboard-container {
-            padding: 20px 4%;
-        }
+        /* ================= DYNAMIC GRID & FILTERS ================= */
+        .dashboard-container { padding: 20px 4%; }
 
         .filter-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        .section-headline {
-            font-size: 1rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-headline span {
-            width: 3.5px;
-            height: 16px;
-            background: var(--accent);
-            border-radius: 2px;
-            display: inline-block;
-        }
+        .section-headline { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .section-headline span { width: 3.5px; height: 16px; background: var(--accent); border-radius: 2px; display: inline-block; }
 
         .custom-dropdown select {
             background: var(--bg-surface);
@@ -281,113 +247,74 @@
             font-weight: 600;
         }
 
-        /* Netflix/Hotstar Style Dual Grid for Android */
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 Cards Per Row Side-by-Side */
-            gap: 12px;
-        }
+        .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
         @media (min-width: 769px) {
-            .media-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-                gap: 20px;
-            }
+            .utility-bar { flex-direction: row; justify-content: space-between; align-items: center; }
+            .search-wrapper { width: 300px; }
+            .media-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
         }
 
-        .stream-card {
-            background: var(--bg-surface);
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.01);
-            transition: transform 0.2s ease;
-            position: relative;
-        }
+        .stream-card { background: var(--bg-surface); border-radius: 10px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.01); transition: transform 0.2s ease; position: relative; }
+        .stream-card:active { transform: scale(0.97); }
 
-        .stream-card:active {
-            transform: scale(0.97); /* Smooth Touch Response */
-        }
+        .card-banner { width: 100%; aspect-ratio: 16 / 10; background: linear-gradient(45deg, #0f172a 0%, #020617 100%); display: flex; justify-content: center; align-items: center; position: relative; }
+        .card-banner i { font-size: 1.5rem; color: rgba(255, 255, 255, 0.12); }
 
-        .card-banner {
-            width: 100%;
-            aspect-ratio: 16 / 10;
-            background: linear-gradient(45deg, #0f172a 0%, #020617 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
+        .live-indicator { position: absolute; top: 8px; left: 8px; background: rgba(239, 68, 68, 0.25); border: 1px solid #ef4444; color: #ef4444; font-size: 0.55rem; font-weight: 700; padding: 1px 6px; border-radius: 20px; text-transform: uppercase; }
+        .card-meta { padding: 8px 10px; background: var(--bg-surface); }
+        .card-headline { font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-subtext { color: var(--text-muted); font-size: 0.7rem; text-transform: capitalize; }
 
-        .card-banner i {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.12);
-        }
-
-        .live-indicator {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: rgba(239, 68, 68, 0.25);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-            font-size: 0.55rem;
-            font-weight: 700;
-            padding: 1px 6px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-
-        .card-meta {
-            padding: 8px 10px;
-            background: var(--bg-surface);
-        }
-
-        .card-headline {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis; /* Block text wrap overflowing grids */
-        }
-
-        .card-subtext {
-            color: var(--text-muted);
-            font-size: 0.7rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px 0;
-            color: #475569;
-            font-size: 0.7rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            margin-top: 30px;
-        }
+        footer { text-align: center; padding: 25px 0; color: #475569; font-size: 0.7rem; border-top: 1px solid rgba(255, 255, 255, 0.02); margin-top: 30px; }
     </style>
 </head>
 <body>
 
+    <!-- 3D INTRO PRELOADER -->
     <div id="intro-loader">
         <div class="intro-title">Till Infinity</div>
         <div class="intro-sub">Premium Network Streaming</div>
     </div>
 
+    <!-- SIDE MENU OVERLAY & DRAWER -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu(false)"></div>
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <span class="brand-text" style="font-size: 1.1rem;">Till Infinity</span>
+            <i class="fa-solid fa-xmark menu-close" onclick="toggleMenu(false)"></i>
+        </div>
+        <div class="profile-box">
+            <i class="fa-solid fa-circle-user"></i>
+            <div class="profile-name" id="profileName">Guest User</div>
+            <button class="btn-auth btn-login" id="loginBtn" onclick="handleAuth('login')">Login</button>
+            <button class="btn-auth btn-logout" id="logoutBtn" onclick="handleAuth('logout')">Log Out</button>
+        </div>
+        <ul class="menu-links">
+            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#" onclick="toggleMenu(false); alert('Ultra Stream Engine Ready!')"><i class="fa-solid fa-crown" style="color: gold;"></i> Ultra Stream</a></li>
+        </ul>
+    </div>
+
+    <!-- HEADER NAVIGATION -->
     <header>
-        <a href="#" class="brand-text">Till Infinity</a>
+        <div class="header-left">
+            <i class="fa-solid fa-bars-staggered menu-trigger" onclick="toggleMenu(true)"></i>
+            <a href="#" class="brand-text">Till Infinity</a>
+        </div>
         <ul class="nav-links">
             <li><a href="#" class="active"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
-            <li><a href="#" onclick="alert('Operations System Engine Connected!')"><i class="fa-solid fa-tv"></i> <span>Streams</span></a></li>
             <li><a href="#" class="btn-premium"><i class="fa-solid fa-crown"></i> <span>Ultra</span></a></li>
         </ul>
     </header>
 
+    <!-- CINEMATIC HERO PLAYER -->
     <section class="hero-theater">
         <div class="ambient-glow"></div>
         <div class="video-box" id="theater-shell">
             <div class="control-panel">
-                <button class="btn-close" onclick="shutdownStream()"><i class="fa-solid fa-xmark"></i> Close</button>
+                <button class="btn-control" onclick="hotReloadStream()"><i class="fa-solid fa-rotate-right"></i> Reload</button>
+                <button class="btn-control btn-close" onclick="shutdownStream()"><i class="fa-solid fa-xmark"></i> Close</button>
             </div>
             <div id="player-canvas"></div>
         </div>
@@ -397,139 +324,291 @@
         </div>
     </section>
 
+    <!-- MAIN INTERFACE CONTAINER -->
     <main class="dashboard-container">
-        <div class="filter-row">
-            <h2 class="section-headline"><span></span>Live Broadcasts</h2>
-            <div class="custom-dropdown">
-                <select id="grid-filter" onchange="runFilterEngine()">
-                    <option value="all">All Genres</option>
-                    <option value="bangla">Bangla</option>
-                    <option value="news">News</option>
-                    <option value="sports">Sports</option>
-                </select>
+        
+        <!-- SMART UTILITY BAR -->
+        <div class="utility-bar">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="engine-search" class="search-input" placeholder="চ্যানেলের নাম সার্চ করুন..." onkeyup="runEngineFilters()">
+            </div>
+            <div class="filter-row" style="margin-bottom: 0; gap: 15px;">
+                <h2 class="section-headline"><span></span>Live Broadcasts</h2>
+                <div class="custom-dropdown">
+                    <select id="grid-filter" onchange="runEngineFilters()">
+                        <option value="all">All Genres</option>
+                        <option value="bangla">Bangla</option>
+                        <option value="news">News / Global</option>
+                        <option value="sports">Sports</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <div class="media-grid">
+        <!-- STREAM CARDS GRID -->
+        <div class="media-grid" id="channels-container">
 
-            <div class="stream-card" data-genre="bangla" onclick="bootMultiStream(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anonda TV', 'Bangla Regional Entertainment')">
+            <!-- BANGLA ORIGINAL CHANNELS -->
+            <div class="stream-card" data-genre="bangla" data-name="anonda tv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tv"></i></div>
-                <div class="card-meta"><div class="card-headline">Anonda TV</div><div class="card-subtext">Bangla • Live</div></div>
+                <div class="card-meta"><div class="card-headline">Anonda TV</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="news" onclick="bootMultiStream(['https://bozztv.com/rongo/rongo-ATNNews/index.m3u8', 'https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/1706.m3u8'], 'ATN News', '24/7 Bengali News Broadcast')">
+            <div class="stream-card" data-genre="news" data-name="atn news">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-newspaper"></i></div>
-                <div class="card-meta"><div class="card-headline">ATN News</div><div class="card-subtext">News • Multi-Route</div></div>
+                <div class="card-meta"><div class="card-headline">ATN News</div><div class="card-subtext">news</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8', 'Boishakhi TV', 'Boishakhi Mass Entertainment')">
+            <div class="stream-card" data-genre="bangla" data-name="boishakhi tv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-circle-play"></i></div>
-                <div class="card-meta"><div class="card-headline">Boishakhi TV</div><div class="card-subtext">Bangla • Network</div></div>
+                <div class="card-meta"><div class="card-headline">Boishakhi TV</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://bozztv.com/rongo/rongo-BTVChattagram/index.m3u8', 'BTV Chattogram', 'BTV Regional Network Station')">
+            <div class="stream-card" data-genre="bangla" data-name="btv chattogram">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-satellite-dish"></i></div>
-                <div class="card-meta"><div class="card-headline">BTV Chattogram</div><div class="card-subtext">Bangla • Regional</div></div>
+                <div class="card-meta"><div class="card-headline">BTV Chattogram</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootMultiStream(['https://tvsen6.aynaott.com/btv_world/index.m3u8', 'https://tvsen6.aynaott.com/btv_world/index.m3u8'], 'BTV World', 'National State Satellite Feed')">
+            <div class="stream-card" data-genre="bangla" data-name="btv world">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-globe"></i></div>
-                <div class="card-meta"><div class="card-headline">BTV World</div><div class="card-subtext">Bangla • Global</div></div>
+                <div class="card-meta"><div class="card-headline">BTV World</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1729/output/index.m3u8', 'Channel 9', 'Infotainment and Entertainment')">
+            <div class="stream-card" data-genre="bangla" data-name="channel 9">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tv"></i></div>
-                <div class="card-meta"><div class="card-headline">Channel 9</div><div class="card-subtext">Bangla • HD</div></div>
+                <div class="card-meta"><div class="card-headline">Channel 9</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="news" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/index.m3u8', 'Channel 24', 'Interactive Current Affairs and News')">
+            <div class="stream-card" data-genre="news" data-name="channel 24">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-clock"></i></div>
-                <div class="card-meta"><div class="card-headline">Channel 24</div><div class="card-subtext">News • 24 Hours</div></div>
+                <div class="card-meta"><div class="card-headline">Channel 24</div><div class="card-subtext">news</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1723/output/index.m3u8', 'Channel I', 'Premium Bengali Cultural Broadcast')">
+            <div class="stream-card" data-genre="bangla" data-name="channel i">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-display"></i></div>
-                <div class="card-meta"><div class="card-headline">Channel I</div><div class="card-subtext">Bangla • Premium</div></div>
+                <div class="card-meta"><div class="card-headline">Channel I</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8', 'Channel S', 'UK & Local Bengali Streaming Info')">
+            <div class="stream-card" data-genre="bangla" data-name="channel s">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tower-broadcast"></i></div>
-                <div class="card-meta"><div class="card-headline">Channel S</div><div class="card-subtext">Bangla • Feed</div></div>
+                <div class="card-meta"><div class="card-headline">Channel S</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="news" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8', 'DBC News', 'DBC Live Satellite Breaking Feed')">
+            <div class="stream-card" data-genre="news" data-name="dbc news">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-bullhorn"></i></div>
-                <div class="card-meta"><div class="card-headline">DBC News</div><div class="card-subtext">News • HD Stream</div></div>
+                <div class="card-meta"><div class="card-headline">DBC News</div><div class="card-subtext">news</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1711/output/index.m3u8', 'Deepto TV', 'Serials, Dramas and Entertainment')">
+            <div class="stream-card" data-genre="bangla" data-name="deepto tv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-masks-theater"></i></div>
-                <div class="card-meta"><div class="card-headline">Deepto TV</div><div class="card-subtext">Bangla • Mega</div></div>
+                <div class="card-meta"><div class="card-headline">Deepto TV</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://bozztv.com/rongo/rongo-DeshTV/index.m3u8', 'Desh TV', 'National Bengali Cultural Programs')">
+            <div class="stream-card" data-genre="bangla" data-name="desh tv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-flag"></i></div>
-                <div class="card-meta"><div class="card-headline">Desh TV</div><div class="card-subtext">Bangla • Network</div></div>
+                <div class="card-meta"><div class="card-headline">Desh TV</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="news" onclick="bootSingleStream('https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/1705.m3u8', 'Ekattor TV', 'First Journalistic Live Station')">
+            <div class="stream-card" data-genre="news" data-name="ekattor tv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-video"></i></div>
-                <div class="card-meta"><div class="card-headline">Ekattor TV</div><div class="card-subtext">News • Journal</div></div>
+                <div class="card-meta"><div class="card-headline">Ekattor TV</div><div class="card-subtext">news</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://ekusheyserver.com/etvlivesn.m3u8', 'Ekushey TV', 'Voice of the Nation Broadcast')">
+            <div class="stream-card" data-genre="bangla" data-name="ekushey tv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-microphone"></i></div>
-                <div class="card-meta"><div class="card-headline">Ekushey TV</div><div class="card-subtext">Bangla • Core</div></div>
+                <div class="card-meta"><div class="card-headline">Ekushey TV</div><div class="card-subtext">bangla</div></div>
             </div>
-
-            <div class="stream-card" data-genre="sports" onclick="bootSingleStream('https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8', 'Gazi TV', 'Premium Bengali Cricket & Entertainment Stream')">
+            <div class="stream-card" data-genre="sports" data-name="gazi tv gtv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-baseball"></i></div>
-                <div class="card-meta"><div class="card-headline">Gazi TV (GTV)</div><div class="card-subtext">Sports • Premium</div></div>
+                <div class="card-meta"><div class="card-headline">Gazi TV (GTV)</div><div class="card-subtext">sports</div></div>
             </div>
-
-            <div class="stream-card" data-genre="bangla" onclick="bootSingleStream('https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/live-orgin/greentv.stream/playlist.m3u8', 'Green TV', 'Modern Lifestyle and News Feed')">
+            <div class="stream-card" data-genre="bangla" data-name="green tv">
                 <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-leaf"></i></div>
-                <div class="card-meta"><div class="card-headline">Green TV</div><div class="card-subtext">Bangla • Family</div></div>
+                <div class="card-meta"><div class="card-headline">Green TV</div><div class="card-subtext">bangla</div></div>
             </div>
 
-            <div class="stream-card" data-genre="sports" onclick="bootSingleStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull TV', 'Extreme Sports Systems & Racing Operations')">
-                <div class="card-banner"><div class="live-indicator">Live HD</div><i class="fa-solid fa-bolt" style="color: #ffaa00;"></i></div>
-                <div class="card-meta"><div class="card-headline">Red Bull TV</div><div class="card-subtext">Sports • Ultra HD</div></div>
+            <!-- NEWLY REQUESTED CHANNELS -->
+            <div class="stream-card" data-genre="news" data-name="al24 news albania">
+                <div class="card-banner"><div class="live-indicator">Global</div><i class="fa-solid fa-newspaper"></i></div>
+                <div class="card-meta"><div class="card-headline">AL24 News</div><div class="card-subtext">news • albania</div></div>
+            </div>
+            <div class="stream-card" data-genre="news" data-name="abtv bariloche argentina">
+                <div class="card-banner"><div class="live-indicator">Global</div><i class="fa-solid fa-tv"></i></div>
+                <div class="card-meta"><div class="card-headline">ABTV Bariloche</div><div class="card-subtext">news • argentina</div></div>
+            </div>
+            <div class="stream-card" data-genre="news" data-name="al jazeera">
+                <div class="card-banner"><div class="live-indicator">HQ</div><i class="fa-solid fa-earth-americas"></i></div>
+                <div class="card-meta"><div class="card-headline">Al Jazeera</div><div class="card-subtext">news • global</div></div>
+            </div>
+            <div class="stream-card" data-genre="news" data-name="al jazeera 2">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-earth-americas"></i></div>
+                <div class="card-meta"><div class="card-headline">Al Jazeera 2</div><div class="card-subtext">news</div></div>
+            </div>
+            <div class="stream-card" data-genre="news" data-name="al jazeera mubasher">
+                <div class="card-banner"><div class="live-indicator">Mubasher</div><i class="fa-solid fa-tower-broadcast"></i></div>
+                <div class="card-meta"><div class="card-headline">AJ Mubasher</div><div class="card-subtext">news</div></div>
+            </div>
+            <div class="stream-card" data-genre="news" data-name="qatar television">
+                <div class="card-banner"><div class="live-indicator">HD</div><i class="fa-solid fa-tv"></i></div>
+                <div class="card-meta"><div class="card-headline">Qatar TV</div><div class="card-subtext">news • qatar</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="tyc sports">
+                <div class="card-banner"><div class="live-indicator">Premium</div><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="card-meta"><div class="card-headline">TyC Sports</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="cricket gold">
+                <div class="card-banner"><div class="live-indicator">Multi</div><i class="fa-solid fa-trophy"></i></div>
+                <div class="card-meta"><div class="card-headline">Cricket Gold</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="red bull tv">
+                <div class="card-banner"><div class="live-indicator">HD+</div><i class="fa-solid fa-bolt" style="color: #ffaa00;"></i></div>
+                <div class="card-meta"><div class="card-headline">Red Bull TV</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="bangla" data-name="ado tv">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-circle-play"></i></div>
+                <div class="card-meta"><div class="card-headline">ADO TV</div><div class="card-subtext">global</div></div>
+            </div>
+            <div class="stream-card" data-genre="news" data-name="ftv bolivia">
+                <div class="card-banner"><div class="live-indicator">HD</div><i class="fa-solid fa-display"></i></div>
+                <div class="card-meta"><div class="card-headline">FTV Bolivia</div><div class="card-subtext">news</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="band sports">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-flag"></i></div>
+                <div class="card-meta"><div class="card-headline">Band Sports</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="combate">
+                <div class="card-banner"><div class="live-indicator">UFC</div><i class="fa-solid fa-hand-fist"></i></div>
+                <div class="card-meta"><div class="card-headline">Combate</div><div class="card-subtext">sports • fight</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="premiere clubes">
+                <div class="card-banner"><div class="live-indicator">Premium</div><i class="fa-solid fa-shirt"></i></div>
+                <div class="card-meta"><div class="card-headline">Premiere Clubes</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="cctv billiards">
+                <div class="card-banner"><div class="live-indicator">HD</div><i class="fa-solid fa-circle"></i></div>
+                <div class="card-meta"><div class="card-headline">CCTV Billiards</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="cctv 16">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tv"></i></div>
+                <div class="card-meta"><div class="card-headline">CCTV 16</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="cctv storm football">
+                <div class="card-banner"><div class="live-indicator">Soccer</div><i class="fa-solid fa-futbol"></i></div>
+                <div class="card-meta"><div class="card-headline">CCTV Storm Soccer</div><div class="card-subtext">sports</div></div>
+            </div>
+            <div class="stream-card" data-genre="sports" data-name="dd sports">
+                <div class="card-banner"><div class="live-indicator">Multi</div><i class="fa-solid fa-medal"></i></div>
+                <div class="card-meta"><div class="card-headline">DD Sports</div><div class="card-subtext">sports</div></div>
             </div>
 
         </div>
     </main>
 
-    <footer>&copy; 2026 Till Infinity Network. Engine Fully Optimized for Android.</footer>
+    <footer>&copy; 2026 Till Infinity Network. Core Engine Stabilized.</footer>
 
     <script>
         var clapprCore = null;
-        var proxyNode = "https://cors-anywhere.herokuapp.com/";
+        var currentActiveUrl = "";
 
-        // ================= INTRO LOADER ENGINE =================
+        // DATABASE ENGINE MAPPING
+        const streamsDatabase = {
+            "anonda tv": ['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'],
+            "atn news": ['https://bozztv.com/rongo/rongo-ATNNews/index.m3u8', 'https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/1706.m3u8'],
+            "boishakhi tv": ['https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8'],
+            "btv chattogram": ['https://bozztv.com/rongo/rongo-BTVChattagram/index.m3u8'],
+            "btv world": ['https://tvsen6.aynaott.com/btv_world/index.m3u8'],
+            "channel 9": ['https://owrcovcrpy.gpcdn.net/bpk-tv/1729/output/index.m3u8'],
+            "channel 24": ['https://owrcovcrpy.gpcdn.net/bpk-tv/1703/output/index.m3u8'],
+            "channel i": ['https://owrcovcrpy.gpcdn.net/bpk-tv/1723/output/index.m3u8'],
+            "channel s": ['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8'],
+            "dbc news": ['https://owrcovcrpy.gpcdn.net/bpk-tv/1728/output/index.m3u8'],
+            "deepto tv": ['https://owrcovcrpy.gpcdn.net/bpk-tv/1711/output/index.m3u8'],
+            "desh tv": ['https://bozztv.com/rongo/rongo-DeshTV/index.m3u8'],
+            "ekattor tv": ['https://owrcovcrpy.gpcdn.net/bpk-tv/1705/output/1705.m3u8'],
+            "ekushey tv": ['https://ekusheyserver.com/etvlivesn.m3u8'],
+            "gazi tv gtv": ['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8'],
+            "green tv": ['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/greentv.stream/live-orgin/greentv.stream/playlist.m3u8'],
+            
+            // NEW ASSIGNMENTS
+            "al24 news albania": ['https://cdn.live.easybroadcast.io/abr_corp/66_al24_u4yga6h/corp/66_al24_u4yga6h_240p/chunks.m3u8'],
+            "abtv bariloche argentina": ['https://videostream.shockmedia.com.ar/hls/abtvbariloche/abtvbariloche.m3u8'],
+            "al jazeera": ['https://amg00222-amg00222c4-amgplt0002.playout.now3.amagi.tv/aljazeera-noscte/playlist.m3u8'],
+            "al jazeera 2": ['https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8'],
+            "al jazeera mubasher": ['https://live-hls-apps-ajm-fa.getaj.net/AJM/index.m3u8'],
+            "qatar television": ['https://live.kwikmotion.com/qtv1live/qtv1.smil/playlist.m3u8'],
+            "tyc sports": ['https://amg26268-amg26268c14-freelivesports-emea-10267.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg26268-sportsstudio-tycsports-freelivesportsemea/playlist.m3u8'],
+            "cricket gold": ['https://d382r3rgbxdixq.cloudfront.net/scheduler/scheduleMaster/418.m3u8', 'https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8', 'https://streams2.sofast.tv/scheduler/scheduleMaster/418.m3u8'],
+            "red bull tv": ['https://3ea22335.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWdiX1JlZEJ1bGxUVl9ITFM/playlist.m3u8', 'https://76b17ec8b2424026b8e1523836cc90e7.mediatailor.us-west-2.amazonaws.com/v1/master/ba62fe743df0fe93366eba3a257d792884136c7f/LINEAR-641-WORBEUENFAST-WHALETVPLUS/641/whaletvplus/hls/master/playlist.m3u8'],
+            "ado tv": ['https://strhls.streamakaci.tv/ortb/ortb2-multi/playlist.m3u8'],
+            "ftv bolivia": ['https://master.tucableip.com/ftvhd/index.m3u8'],
+            "band sports": ['http://167.250.126.140:7777/BANDSPORTS-HD/index.m3u8'],
+            "combate": ['http://143.14.134.107:80/167/index.m3u8'],
+            "premiere clubes": ['http://45.162.231.38:7779/Premiere_Clubes/index.m3u8'],
+            "cctv billiards": ['http://38.75.136.137:98/gslb/dsdqpub/ystq.m3u8?auth=testpub'],
+            "cctv 16": ['http://74.91.26.218:82/live/cctv16hd.m3u8'],
+            "cctv storm football": ['http://38.75.136.137:98/gslb/dsdqpub/fyzq.m3u8?auth=testpub'],
+            "dd sports": ['https://cdn-6.pishow.tv/live/13/master.m3u8', 'https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index.m3u8']
+        };
+
+        // INTRO PRELOADER REMOVAL
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('intro-loader');
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-                document.body.style.overflowY = 'auto'; // Unlock scroll
-            }, 3000);
+                document.body.style.overflowY = 'auto';
+            }, 2500);
+            
+            // Map event listeners onto grid generated elements
+            const cards = document.querySelectorAll('.stream-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const id = this.getAttribute('data-name');
+                    if(streamsDatabase[id]) {
+                        bootMultiRouteEngine(streamsDatabase[id]);
+                    }
+                });
+            });
         });
 
-        function runFilterEngine() {
-            var filter = document.getElementById('grid-filter').value;
-            var cards = document.getElementsByClassName('stream-card');
-            for (var i = 0; i < cards.length; i++) {
-                var itemGenre = cards[i].getAttribute('data-genre');
-                cards[i].style.display = (filter === 'all' || itemGenre === filter) ? 'block' : 'none';
+        // SIDE MENU CONTROLS
+        function toggleMenu(open) {
+            const menu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('menuOverlay');
+            if(open) { menu.classList.add('open'); overlay.style.display = 'block'; } 
+            else { menu.classList.remove('open'); overlay.style.display = 'none'; }
+        }
+
+        // AUTH CONTROL
+        function handleAuth(type) {
+            const nameField = document.getElementById('profileName');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            if(type === 'login') {
+                nameField.innerText = "Till Infinity Member";
+                loginBtn.style.display = "none"; logoutBtn.style.display = "block";
+            } else {
+                nameField.innerText = "Guest User";
+                loginBtn.style.display = "block"; logoutBtn.style.display = "none";
             }
         }
 
-        function mountPlayer(targetUrl) {
+        // INTEGRATED SEARCH & GENRE FILTER ENGINE
+        function runEngineFilters() {
+            var searchVal = document.getElementById('engine-search').value.toLowerCase().trim();
+            var genreVal = document.getElementById('grid-filter').value;
+            var cards = document.getElementsByClassName('stream-card');
+
+            for (var i = 0; i < cards.length; i++) {
+                var cardGenre = cards[i].getAttribute('data-genre');
+                var cardName = cards[i].getAttribute('data-name');
+                
+                var matchesGenre = (genreVal === 'all' || cardGenre === genreVal);
+                var matchesSearch = (cardName.includes(searchVal));
+
+                if(matchesGenre && matchesSearch) {
+                    cards[i].style.display = 'block';
+                } else {
+                    cards[i].style.display = 'none';
+                }
+            }
+        }
+
+        // CORE PLAYER CONTROLLERS (ANTI-BUFFER / ANTI-CRASH)
+        function mountCorePlayer(url) {
             if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); }
-            
+            currentActiveUrl = url;
+
             clapprCore = new Clappr.Player({
-                source: targetUrl,
+                source: url,
                 parentId: "#player-canvas",
                 baseUrl: 'https://cdn.jsdelivr.net/npm/clappr@latest/dist',
                 autoPlay: true,
@@ -537,57 +616,58 @@
                 height: '100%',
                 playback: {
                     hlsjsConfig: {
-                        manifestLoadingTimeOut: 5000,
-                        manifestLoadingMaxRetry: 1,
-                        levelLoadingTimeOut: 5000
+                        // Anti-Buffering High Stability Optimization
+                        maxBufferLength: 20,
+                        maxMaxBufferLength: 40,
+                        liveBackBufferLength: 10,
+                        enableWorker: true,
+                        lowLatencyMode: true,
+                        manifestLoadingTimeOut: 10000,
+                        manifestLoadingMaxRetry: 3,
+                        levelLoadingTimeOut: 10000,
+                        levelLoadingMaxRetry: 3
                     }
                 }
             });
         }
 
-        function bootMultiStream(routeArray, title, desc) {
+        function bootMultiRouteEngine(urlArray) {
             document.getElementById('idle-core').style.display = 'none';
             document.getElementById('theater-shell').style.display = 'block';
             
-            var currentRouteIdx = 0;
-            var isProxyTriggered = false;
+            var routeIndex = 0;
 
-            function processRouteLoop() {
-                if (currentRouteIdx >= routeArray.length) {
-                    if (!isProxyTriggered) {
-                        currentRouteIdx = 0;
-                        isProxyTriggered = true;
-                    } else {
-                        document.getElementById('theater-shell').style.display = 'none';
-                        var ph = document.getElementById('idle-core');
-                        ph.style.display = 'block';
-                        document.getElementById('panel-title').innerText = "Stream Offline";
-                        return;
-                    }
+            function attemptRouteSequence() {
+                if (routeIndex >= urlArray.length) {
+                    document.getElementById('theater-shell').style.display = 'none';
+                    var ph = document.getElementById('idle-core');
+                    ph.style.display = 'block';
+                    document.getElementById('panel-title').innerText = "Feed Unreachable";
+                    return;
                 }
 
-                var activeUrl = isProxyTriggered ? (proxyNode + routeArray[currentRouteIdx]) : routeArray[currentRouteIdx];
-                mountPlayer(activeUrl);
+                mountCorePlayer(urlArray[routeIndex]);
 
+                // Fallback loop if stream errors out
                 clapprCore.on(Clappr.Events.PLAYER_ERROR, function() {
-                    currentRouteIdx++;
-                    processRouteLoop();
+                    routeIndex++;
+                    attemptRouteSequence();
                 });
             }
 
-            processRouteLoop();
+            attemptRouteSequence();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function bootSingleStream(url, title, desc) {
-            document.getElementById('idle-core').style.display = 'none';
-            document.getElementById('theater-shell').style.display = 'block';
-            mountPlayer(url);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function hotReloadStream() {
+            if (currentActiveUrl) {
+                mountCorePlayer(currentActiveUrl);
+            }
         }
 
         function shutdownStream() {
             if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); clapprCore = null; }
+            currentActiveUrl = "";
             document.getElementById('theater-shell').style.display = 'none';
             document.getElementById('idle-core').style.display = 'block';
         }
