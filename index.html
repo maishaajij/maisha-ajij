@@ -286,7 +286,7 @@
         <div class="hero-content">
             <div class="live-tag">● Live Now</div>
             <h1 class="hero-title" id="current-playing-title">Premium IPTV Dashboard</h1>
-            <p class="hero-desc" id="current-playing-desc">Select a live working channel below. Powered by Multi-Route Fallback System.</p>
+            <p class="hero-desc" id="current-playing-desc">Select a live working channel below. Powered by Multi-Route Fallback Engine.</p>
         </div>
     </section>
 
@@ -298,7 +298,9 @@
             <div class="filter-dropdowns">
                 <select id="category-filter" onchange="filterChannels()">
                     <option value="all">All Categories</option>
+                    <option value="bangla">Bangla Channels</option>
                     <option value="sports">Sports</option>
+                    <option value="news">International News</option>
                     <option value="entertainment">Entertainment</option>
                 </select>
             </div>
@@ -309,7 +311,31 @@
         <div class="channels-grid">
             <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
 
-            <!-- MLS Live Fixed YouTube Channel -->
+            <!-- 1. Anondo TV (Your 4 Links Combined with Proxy Fallback) -->
+            <div class="channel-card" data-name="anondo tv ananda bangla entertainment" data-category="bangla" onclick="playMultiRoute(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anondo TV', 'Bangla Entertainment & News Feed Network')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=Anondo+TV" alt="Anondo TV">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Anondo TV</div>
+                    <div class="channel-category">Bangla Channels</div>
+                </div>
+            </div>
+
+            <!-- 2. Bangla Vision (Your Link with Proxy Bypass Setup) -->
+            <div class="channel-card" data-name="bangla vision banglavision entertainment" data-category="bangla" onclick="playMultiRoute(['https://tvsen5.aynaott.com/banglavision/index.m3u8'], 'Bangla Vision', 'Premium Bangla Entertainment Channel')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=Bangla+Vision" alt="Bangla Vision">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">Bangla Vision</div>
+                    <div class="channel-category">Bangla Channels</div>
+                </div>
+            </div>
+
+            <!-- 3. MLS Live Fixed YouTube Channel -->
             <div class="channel-card" data-name="mls live football sports youtube" data-category="sports" onclick="playYouTube('kJq09z0N-Fw', 'MLS Live Match', 'Major League Soccer - Direct YouTube Embed Stream')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
@@ -321,7 +347,7 @@
                 </div>
             </div>
 
-            <!-- Andromeda Channel (Multi-links Fallback) -->
+            <!-- 4. Andromeda Channel -->
             <div class="channel-card" data-name="andromeda entertainment" data-category="entertainment" onclick="playMultiRoute(['https://jmp2.uk/plu-663a163f8ea5560008a3f234.m3u8', 'https://jmp2.uk/plu-6177fb39b68ef1000725e59e.m3u8', 'https://jmp2.uk/plu-617807a1a3a6160007f615e4.m3u8', 'https://jmp2.uk/plu-6178156e54712100072d6b2b.m3u8', 'https://jmp2.uk/plu-6850335b5965a2fd49f7e36d.m3u8'], 'Andromeda', 'Premium Movie & Entertainment Network')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
@@ -333,7 +359,7 @@
                 </div>
             </div>
 
-            <!-- Red Bull TV (Active) -->
+            <!-- 5. Red Bull TV (Active) -->
             <div class="channel-card" data-name="red bull tv sports" data-category="sports" onclick="playSingleRoute('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull Sports TV', 'Extreme Sports and Live Racing - 1080p HD')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
@@ -345,6 +371,54 @@
                 </div>
             </div>
 
+            <!-- 6. NHK World News (Global Work) -->
+            <div class="channel-card" data-name="nhk world news japan english" data-category="news" onclick="playSingleRoute('https://nhkwlive-x.akamaized.net/hls/live/2003458/nhkwlive-x-en/master.m3u8', 'NHK World News', 'Japan Global News Network - 1080p HD')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=NHK+World" alt="NHK World">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">NHK World News</div>
+                    <div class="channel-category">International News</div>
+                </div>
+            </div>
+
+            <!-- 7. DW News (Global Work) -->
+            <div class="channel-card" data-name="dw news germany english" data-category="news" onclick="playSingleRoute('https://dwamdstream102.akamaized.net/hls/live/2015532/dwstream102/master.m3u8', 'DW News HD', 'Germany International Broadcast Network')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=DW+News" alt="DW News">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">DW News HD</div>
+                    <div class="channel-category">International News</div>
+                </div>
+            </div>
+
+            <!-- 8. CNA News (Global Work) -->
+            <div class="channel-card" data-name="cna news singapore" data-category="news" onclick="playSingleRoute('https://mediacorp-cna-hls.mediacorp.sg/master_ad.m3u8', 'CNA News Asia', 'Singapore Global News Network')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=CNA+News" alt="CNA News">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">CNA News Asia</div>
+                    <div class="channel-category">International News</div>
+                </div>
+            </div>
+
+            <!-- 9. ABC News (Global Work) -->
+            <div class="channel-card" data-name="abc news usa american" data-category="news" onclick="playSingleRoute('https://content.uplynk.com/channel/3324f2467c414329b3b0cc5cd987b6be.m3u8', 'ABC News USA', 'American 24/7 Live Breaking News')">
+                <div class="poster-wrapper">
+                    <div class="card-live-badge">Live</div>
+                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=ABC+News" alt="ABC News">
+                </div>
+                <div class="channel-info">
+                    <div class="channel-name">ABC News USA</div>
+                    <div class="channel-category">International News</div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -352,6 +426,8 @@
 
     <script>
         var playerInstance = null;
+        // Public Reliable CORS Proxy Link 
+        var corsProxy = "https://cors-anywhere.herokuapp.com/";
 
         function filterChannels() {
             var searchVal = document.getElementById('search-input').value.toLowerCase();
@@ -392,15 +468,14 @@
                 mute: false,
                 playback: {
                     hlsjsConfig: {
-                        manifestLoadingTimeOut: 8000, 
-                        manifestLoadingMaxRetry: 2,
-                        levelLoadingTimeOut: 8000
+                        manifestLoadingTimeOut: 6000, 
+                        manifestLoadingMaxRetry: 1,
+                        levelLoadingTimeOut: 6000
                     }
                 }
             });
         }
 
-        // Fixed YouTube Play Engine
         function playYouTube(videoId, name, desc) {
             var playerBox = document.getElementById('player-box');
             var target = document.getElementById('video-target');
@@ -409,17 +484,14 @@
             document.getElementById('current-playing-desc').innerText = desc;
             playerBox.style.display = 'block';
 
-            if (playerInstance && typeof playerInstance.destroy === 'function') {
-                playerInstance.destroy();
-            }
+            if (playerInstance && typeof playerInstance.destroy === 'function') { playerInstance.destroy(); }
             playerInstance = "youtube";
 
-            // Direct fixed player link
             target.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Multi-link Fallback Core Loop Engine with Auto Proxy Toggling
         function playMultiRoute(urlArray, name, desc) {
             var playerBox = document.getElementById('player-box');
             document.getElementById('current-playing-title').innerText = name;
@@ -427,17 +499,27 @@
             document.getElementById('video-target').innerHTML = "";
             
             var currentIdx = 0;
+            var useProxy = false;
 
             function tryNextRoute() {
                 if (currentIdx >= urlArray.length) {
-                    document.getElementById('current-playing-desc').innerText = "Error: All 5 links are currently down.";
-                    return;
+                    if(!useProxy) {
+                        // If normal route fails, try once again via CORS Proxy Routing
+                        currentIdx = 0;
+                        useProxy = true;
+                        document.getElementById('current-playing-desc').innerText = "Bypassing local blocks, re-connecting via CORS Proxy servers...";
+                    } else {
+                        document.getElementById('current-playing-desc').innerText = "Error: This channel feed is currently down or Token Expired.";
+                        return;
+                    }
                 }
                 
-                var targetUrl = urlArray[currentIdx];
-                document.getElementById('current-playing-desc').innerText = desc + " (Trying Route " + (currentIdx + 1) + "/5...)";
+                var originalUrl = urlArray[currentIdx];
+                var finalUrl = useProxy ? (corsProxy + originalUrl) : originalUrl;
                 
-                initClappr(targetUrl);
+                document.getElementById('current-playing-desc').innerText = desc + " (Testing Link Route " + (currentIdx + 1) + "/" + urlArray.length + "...)";
+                
+                initClappr(finalUrl);
 
                 playerInstance.on(Clappr.Events.PLAYER_ERROR, function() {
                     currentIdx++;
@@ -465,9 +547,7 @@
             document.getElementById('current-playing-title').innerText = "Premium IPTV Dashboard";
             document.getElementById('current-playing-desc').innerText = "Select a live working channel below.";
             
-            if (playerInstance && typeof playerInstance.destroy === 'function') { 
-                playerInstance.destroy(); 
-            }
+            if (playerInstance && typeof playerInstance.destroy === 'function') { playerInstance.destroy(); }
             playerInstance = null;
             document.getElementById('video-target').innerHTML = "";
             playerBox.style.display = 'none';
