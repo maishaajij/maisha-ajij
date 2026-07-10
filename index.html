@@ -66,7 +66,8 @@
             position: relative;
             width: 100%;
             height: 65vh;
-            background: linear-gradient(to bottom, rgba(5, 8, 17, 0.1), #050811), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1920') center/cover no-repeat;
+            background: linear-gradient(to bottom, rgba(5, 8, 17, 0.1), #050811);
+            background-color: #0d1222;
             display: flex;
             align-items: center;
             padding: 0 6%;
@@ -193,14 +194,21 @@
         .poster-wrapper {
             width: 100%;
             aspect-ratio: 16 / 10;
-            background: #161c33;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .poster-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .poster-placeholder {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            padding: 10px;
         }
 
         .card-live-badge {
@@ -213,6 +221,7 @@
             font-weight: 700;
             padding: 2px 8px;
             border-radius: 3px;
+            z-index: 2;
         }
 
         .channel-info {
@@ -302,11 +311,11 @@
         <div class="channels-grid">
             <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
 
-            <!-- 1. Red Bull TV (100% Active Global Sports) -->
+            <!-- 1. Red Bull TV (Active) -->
             <div class="channel-card" data-name="red bull tv sports" data-category="sports" onclick="playStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull Sports TV', 'Extreme Sports and Live Racing - 1080p HD')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1540747737956-37872ee754ad?q=80&w=600" alt="Sports Image">
+                    <div class="poster-placeholder">Red Bull TV</div>
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">Red Bull Sports TV</div>
@@ -314,11 +323,11 @@
                 </div>
             </div>
 
-            <!-- 2. Fashion TV (100% Active Entertainment) -->
+            <!-- 2. Fashion TV (Active) -->
             <div class="channel-card" data-name="fashion tv entertainment" data-category="entertainment" onclick="playStream('https://fash1043.cloudycdn.be/stream.m3u8', 'Fashion TV HD', 'Global Lifestyle & Entertainment Stream')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600" alt="Entertainment Image">
+                    <div class="poster-placeholder">Fashion TV</div>
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">Fashion TV HD</div>
@@ -326,11 +335,11 @@
                 </div>
             </div>
 
-            <!-- 3. Somoy TV (Your Link) -->
-            <div class="channel-card" data-name="somoy tv" data-category="sports" onclick="playStream('https://tvsen6.aynaott.com/somoytv/index.m3u8', 'Somoy TV', 'Sports Mode - Network Check')">
+            <!-- 3. Somoy TV (Replace URL with your new feed link) -->
+            <div class="channel-card" data-name="somoy tv" data-category="sports" onclick="playStream('https://tvsen6.aynaott.com/somoytv/index.m3u8', 'Somoy TV', 'Sports Mode - Paste your live feed link here')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600" alt="Sports Image">
+                    <div class="poster-placeholder">Somoy TV</div>
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">Somoy TV</div>
@@ -338,11 +347,11 @@
                 </div>
             </div>
 
-            <!-- 4. T Sports (Your Link) -->
-            <div class="channel-card" data-name="t sports" data-category="sports" onclick="playStream('https://trs1.aynaott.com/tsports/index.m3u8', 'T Sports', 'Sports Mode - Network Check')">
+            <!-- 4. T Sports (Replace URL with your new feed link) -->
+            <div class="channel-card" data-name="t sports" data-category="sports" onclick="playStream('https://trs1.aynaott.com/tsports/index.m3u8', 'T Sports', 'Sports Mode - Paste your live feed link here')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=600" alt="Sports Image">
+                    <div class="poster-placeholder">T Sports</div>
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">T Sports</div>
@@ -350,11 +359,11 @@
                 </div>
             </div>
 
-            <!-- 5. CAZE TV (Your Link) -->
+            <!-- 5. CAZE TV -->
             <div class="channel-card" data-name="caze tv" data-category="sports" onclick="playStream('https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8', 'CAZE TV', 'International Sports Broadcast')">
                 <div class="poster-wrapper">
                     <div class="card-live-badge">Live</div>
-                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600" alt="News Image">
+                    <div class="poster-placeholder">CAZE TV</div>
                 </div>
                 <div class="channel-info">
                     <div class="channel-name">CAZE TV</div>
@@ -411,7 +420,6 @@
                 width: '100%',
                 height: '100%',
                 mute: false,
-                // Network configurations to avoid early manifest timeouts
                 playback: {
                     hlsjsConfig: {
                         manifestLoadingTimeOut: 20000, 
