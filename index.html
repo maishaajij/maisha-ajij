@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Till Infinity Play - Premium IPTV</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Clappr Player Engine -->
+    <title>Till Infinity Play</title>
+    <!-- Google Fonts & Clappr (Optimized & Fast Load) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
     
     <style>
@@ -14,23 +13,23 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: #050811;
+            background-color: #0b0f19;
             color: #ffffff;
             overflow-x: hidden;
-            padding-bottom: 50px;
+            padding-bottom: 30px;
         }
 
+        /* Professional Header & Menu Bar with Image Logo */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 6%;
-            background: rgba(5, 8, 17, 0.95);
-            backdrop-filter: blur(10px);
+            padding: 10px 5%;
+            background: #060913;
             position: fixed;
             top: 0;
             left: 0;
@@ -39,518 +38,334 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: #ff2a5f;
-        }
-
-        .btn-subscribe {
-            background: #ff2a5f;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .hero-section {
-            margin-top: 80px;
-            position: relative;
-            width: 100%;
-            height: 65vh;
-            background: #0d1222;
+        .brand-logo {
             display: flex;
             align-items: center;
-            padding: 0 6%;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .player-container {
+        .brand-logo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff2a5f;
+            box-shadow: 0 0 10px rgba(2ff, 42, 95, 0.3);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #ffffff;
+        }
+
+        /* Hero Player Section */
+        .player-section {
+            margin-top: 70px;
+            width: 100%;
+            height: 55vh;
+            background: #020617;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .player-placeholder {
+            text-align: center;
+            max-width: 500px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .player-placeholder h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .player-placeholder p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 10;
             background: #000;
+            z-index: 5;
             display: none;
         }
 
-        #video-target {
+        #player-target {
             width: 100%;
             height: 100%;
         }
 
-        #video-target iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .hero-content {
-            max-width: 600px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .live-tag {
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background: #ff2a5f;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 15px;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 10;
+            font-size: 0.85rem;
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.1;
+        /* Content Grid */
+        .container {
+            padding: 40px 5%;
         }
 
-        .hero-desc {
-            color: #aaaaaa;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .main-content {
-            padding: 40px 6%;
-        }
-
-        .search-filter-bar {
-            background: #0d1222;
-            padding: 20px;
-            border-radius: 16px;
+        .section-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            margin-bottom: 25px;
         }
 
-        .search-box {
-            flex: 1;
-            min-width: 250px;
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-left: 3px solid #ff2a5f;
+            padding-left: 10px;
         }
 
-        .search-box input {
-            width: 100%;
-            background: #13192e;
+        .filter-select {
+            background: #111827;
+            color: #94a3b8;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 12px 20px;
-            border-radius: 10px;
-            color: white;
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        .filter-dropdowns select {
-            background: #13192e;
-            color: #cccccc;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 6px;
             outline: none;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .grid-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 25px;
-            border-left: 4px solid #ff2a5f;
-            padding-left: 12px;
-        }
-
-        .channels-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
 
-        .channel-card {
-            background: #0d1222;
-            border-radius: 16px;
+        .card {
+            background: #111827;
+            border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s, border-color 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.02);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        .channel-card:hover {
-            transform: translateY(-8px);
+        .card:hover {
+            transform: translateY(-4px);
             border-color: #ff2a5f;
         }
 
-        .poster-wrapper {
+        .thumbnail {
             width: 100%;
-            aspect-ratio: 16 / 10;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #1f2937;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            color: #4b5563;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
         }
 
-        .poster-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-live-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #ff2a5f;
-            color: white;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 3px;
-            z-index: 2;
-        }
-
-        .channel-info {
+        .card-body {
             padding: 15px;
         }
 
-        .channel-name {
-            font-size: 1rem;
+        .card-title {
+            font-size: 0.95rem;
             font-weight: 600;
-            color: #ffffff;
             margin-bottom: 4px;
         }
 
-        .channel-category {
-            font-size: 0.8rem;
-            color: #777d93;
-        }
-
-        .close-player {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            background: rgba(255, 42, 95, 0.9);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            z-index: 20;
-            font-weight: 600;
-        }
-
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            color: #777d93;
-            font-size: 1.1rem;
-            display: none;
+        .card-tag {
+            font-size: 0.75rem;
+            color: #64748b;
         }
 
         footer {
             text-align: center;
-            margin-top: 50px;
-            color: #475569;
-            font-size: 0.85rem;
+            padding: 30px 0;
+            color: #334155;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Main Navigation Bar with New Image Logo -->
     <header>
-        <div class="logo">TILL INFINITY<span>PLAY</span></div>
-        <div class="auth-buttons">
-            <a href="#" class="btn-subscribe">Subscribe</a>
+        <div class="brand-logo">
+            <img src="https://i.postimg.cc/9FmD1wM6/1000008322.jpg" alt="Logo">
+            Till Infinity Play
         </div>
+        <ul class="nav-menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#" onclick="alert('Premium Features Coming Soon!')">Live TV</a></li>
+            <li><a href="#" onclick="alert('Contact: admin@tillinfinity.com')">Support</a></li>
+        </ul>
     </header>
 
-    <section class="hero-section" id="hero-banner">
-        <div class="player-container" id="player-box">
-            <button class="close-player" onclick="closeStream()">✕ Close Player</button>
-            <div id="video-target"></div>
+    <!-- Optimized Hero Stream Section -->
+    <section class="player-section">
+        <div class="video-container" id="player-wrapper">
+            <button class="close-btn" onclick="stopStream()">✕ Close</button>
+            <div id="player-target"></div>
         </div>
-        <div class="hero-content">
-            <div class="live-tag">● Live Now</div>
-            <h1 class="hero-title" id="current-playing-title">Premium IPTV Dashboard</h1>
-            <p class="hero-desc" id="current-playing-desc">Select a live working channel below. Powered by Multi-Route Fallback Engine.</p>
+        <div class="player-placeholder" id="placeholder-text">
+            <h1 id="display-title">Welcome Vlogger Hub</h1>
+            <p id="display-desc">Select an optimized live stream channel below to begin instant high-speed playback.</p>
         </div>
     </section>
 
-    <main class="main-content">
-        <div class="search-filter-bar">
-            <div class="search-box">
-                <input type="text" id="search-input" onkeyup="filterChannels()" placeholder="Search channels by name...">
-            </div>
-            <div class="filter-dropdowns">
-                <select id="category-filter" onchange="filterChannels()">
-                    <option value="all">All Categories</option>
-                    <option value="bangla">Bangla Channels</option>
-                    <option value="sports">Sports</option>
-                    <option value="news">International News</option>
-                    <option value="entertainment">Entertainment</option>
-                </select>
-            </div>
+    <!-- Main Live Channels Content -->
+    <main class="container">
+        <div class="section-header">
+            <h2 class="section-title">Live Broadcasters</h2>
+            <select class="filter-select" id="genre-filter" onchange="filterGrid()">
+                <option value="all">All Genres</option>
+                <option value="bangla">Bangla TV</option>
+                <option value="sports">Sports</option>
+            </select>
         </div>
 
-        <h2 class="grid-title">Available Channels</h2>
-        
-        <div class="channels-grid">
-            <div class="no-results" id="no-results-msg">No channels found matching your search.</div>
-
-            <!-- 1. Anondo TV (Your 4 Links Combined with Proxy Fallback) -->
-            <div class="channel-card" data-name="anondo tv ananda bangla entertainment" data-category="bangla" onclick="playMultiRoute(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anondo TV', 'Bangla Entertainment & News Feed Network')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=Anondo+TV" alt="Anondo TV">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Anondo TV</div>
-                    <div class="channel-category">Bangla Channels</div>
+        <div class="grid">
+            <!-- 1. Anonda TV -->
+            <div class="card" data-genre="bangla" onclick="loadMultiStream(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anonda TV', 'Bangla Regional Entertainment & Live News')">
+                <div class="thumbnail">ANONDA TV</div>
+                <div class="card-body">
+                    <div class="card-title">Anonda TV</div>
+                    <div class="card-tag">Bangla TV • Live</div>
                 </div>
             </div>
 
-            <!-- 2. Bangla Vision (Your Link with Proxy Bypass Setup) -->
-            <div class="channel-card" data-name="bangla vision banglavision entertainment" data-category="bangla" onclick="playMultiRoute(['https://tvsen5.aynaott.com/banglavision/index.m3u8'], 'Bangla Vision', 'Premium Bangla Entertainment Channel')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=Bangla+Vision" alt="Bangla Vision">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Bangla Vision</div>
-                    <div class="channel-category">Bangla Channels</div>
+            <!-- 2. Red Bull TV -->
+            <div class="card" data-genre="sports" onclick="loadSingleStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull TV', 'Extreme Sports, Motorsports & Global Racing Events')">
+                <div class="thumbnail" style="color: #ef4444;">RED BULL TV</div>
+                <div class="card-body">
+                    <div class="card-title">Red Bull TV</div>
+                    <div class="card-tag">Sports • 1080p HD</div>
                 </div>
             </div>
-
-            <!-- 3. MLS Live Fixed YouTube Channel -->
-            <div class="channel-card" data-name="mls live football sports youtube" data-category="sports" onclick="playYouTube('kJq09z0N-Fw', 'MLS Live Match', 'Major League Soccer - Direct YouTube Embed Stream')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/0f172a/ffffff?text=MLS+LIVE" alt="MLS Live">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">MLS Live (YouTube)</div>
-                    <div class="channel-category">Sports</div>
-                </div>
-            </div>
-
-            <!-- 4. Andromeda Channel -->
-            <div class="channel-card" data-name="andromeda entertainment" data-category="entertainment" onclick="playMultiRoute(['https://jmp2.uk/plu-663a163f8ea5560008a3f234.m3u8', 'https://jmp2.uk/plu-6177fb39b68ef1000725e59e.m3u8', 'https://jmp2.uk/plu-617807a1a3a6160007f615e4.m3u8', 'https://jmp2.uk/plu-6178156e54712100072d6b2b.m3u8', 'https://jmp2.uk/plu-6850335b5965a2fd49f7e36d.m3u8'], 'Andromeda', 'Premium Movie & Entertainment Network')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://images.directv.com/contentdam/dtv/production/assets/nebula-images/network-logos/v3/Dark_Andromeda_600x400.png" onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Andromeda'" alt="Andromeda">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Andromeda</div>
-                    <div class="channel-category">Entertainment</div>
-                </div>
-            </div>
-
-            <!-- 5. Red Bull TV (Active) -->
-            <div class="channel-card" data-name="red bull tv sports" data-category="sports" onclick="playSingleRoute('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull Sports TV', 'Extreme Sports and Live Racing - 1080p HD')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=Red+Bull+TV" alt="Red Bull TV">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">Red Bull Sports TV</div>
-                    <div class="channel-category">Sports</div>
-                </div>
-            </div>
-
-            <!-- 6. NHK World News (Global Work) -->
-            <div class="channel-card" data-name="nhk world news japan english" data-category="news" onclick="playSingleRoute('https://nhkwlive-x.akamaized.net/hls/live/2003458/nhkwlive-x-en/master.m3u8', 'NHK World News', 'Japan Global News Network - 1080p HD')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=NHK+World" alt="NHK World">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">NHK World News</div>
-                    <div class="channel-category">International News</div>
-                </div>
-            </div>
-
-            <!-- 7. DW News (Global Work) -->
-            <div class="channel-card" data-name="dw news germany english" data-category="news" onclick="playSingleRoute('https://dwamdstream102.akamaized.net/hls/live/2015532/dwstream102/master.m3u8', 'DW News HD', 'Germany International Broadcast Network')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=DW+News" alt="DW News">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">DW News HD</div>
-                    <div class="channel-category">International News</div>
-                </div>
-            </div>
-
-            <!-- 8. CNA News (Global Work) -->
-            <div class="channel-card" data-name="cna news singapore" data-category="news" onclick="playSingleRoute('https://mediacorp-cna-hls.mediacorp.sg/master_ad.m3u8', 'CNA News Asia', 'Singapore Global News Network')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=CNA+News" alt="CNA News">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">CNA News Asia</div>
-                    <div class="channel-category">International News</div>
-                </div>
-            </div>
-
-            <!-- 9. ABC News (Global Work) -->
-            <div class="channel-card" data-name="abc news usa american" data-category="news" onclick="playSingleRoute('https://content.uplynk.com/channel/3324f2467c414329b3b0cc5cd987b6be.m3u8', 'ABC News USA', 'American 24/7 Live Breaking News')">
-                <div class="poster-wrapper">
-                    <div class="card-live-badge">Live</div>
-                    <img src="https://placehold.co/600x400/1e293b/ffffff?text=ABC+News" alt="ABC News">
-                </div>
-                <div class="channel-info">
-                    <div class="channel-name">ABC News USA</div>
-                    <div class="channel-category">International News</div>
-                </div>
-            </div>
-
         </div>
     </main>
 
-    <footer>&copy; 2026 Till Infinity. All Rights Reserved.</footer>
+    <footer>&copy; 2026 Till Infinity. Built for High-Speed Performance.</footer>
 
     <script>
-        var playerInstance = null;
-        // Public Reliable CORS Proxy Link 
-        var corsProxy = "https://cors-anywhere.herokuapp.com/";
+        var player = null;
+        var proxyServer = "https://cors-anywhere.herokuapp.com/";
 
-        function filterChannels() {
-            var searchVal = document.getElementById('search-input').value.toLowerCase();
-            var catVal = document.getElementById('category-filter').value;
-            var cards = document.getElementsByClassName('channel-card');
-            var noResults = document.getElementById('no-results-msg');
-            var visibleCount = 0;
-
+        function filterGrid() {
+            var val = document.getElementById('genre-filter').value;
+            var cards = document.getElementsByClassName('card');
             for (var i = 0; i < cards.length; i++) {
-                var name = cards[i].getAttribute('data-name');
-                var category = cards[i].getAttribute('data-category');
-                var matchesSearch = name.includes(searchVal);
-                var matchesCategory = (catVal === 'all' || category === catVal);
-
-                if (matchesSearch && matchesCategory) {
-                    cards[i].style.display = 'block';
-                    visibleCount++;
-                } else {
-                    cards[i].style.display = 'none';
-                }
+                var genre = cards[i].getAttribute('data-genre');
+                cards[i].style.display = (val === 'all' || genre === val) ? 'block' : 'none';
             }
-            noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        function initClappr(url) {
-            if (playerInstance) { 
-                if(typeof playerInstance.destroy === 'function') { playerInstance.destroy(); }
-                playerInstance = null;
-            }
+        function startClappr(streamUrl) {
+            if (player && typeof player.destroy === 'function') { player.destroy(); }
             
-            playerInstance = new Clappr.Player({
-                source: url,
-                parentId: "#video-target",
+            player = new Clappr.Player({
+                source: streamUrl,
+                parentId: "#player-target",
                 baseUrl: 'https://cdn.jsdelivr.net/npm/clappr@latest/dist',
                 autoPlay: true,
                 width: '100%',
                 height: '100%',
-                mute: false,
                 playback: {
                     hlsjsConfig: {
-                        manifestLoadingTimeOut: 6000, 
+                        manifestLoadingTimeOut: 5000,
                         manifestLoadingMaxRetry: 1,
-                        levelLoadingTimeOut: 6000
+                        levelLoadingTimeOut: 5000
                     }
                 }
             });
         }
 
-        function playYouTube(videoId, name, desc) {
-            var playerBox = document.getElementById('player-box');
-            var target = document.getElementById('video-target');
+        function loadMultiStream(urls, title, desc) {
+            document.getElementById('placeholder-text').style.display = 'none';
+            document.getElementById('player-wrapper').style.display = 'block';
             
-            document.getElementById('current-playing-title').innerText = name;
-            document.getElementById('current-playing-desc').innerText = desc;
-            playerBox.style.display = 'block';
+            var idx = 0;
+            var proxyActive = false;
 
-            if (playerInstance && typeof playerInstance.destroy === 'function') { playerInstance.destroy(); }
-            playerInstance = "youtube";
-
-            target.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Multi-link Fallback Core Loop Engine with Auto Proxy Toggling
-        function playMultiRoute(urlArray, name, desc) {
-            var playerBox = document.getElementById('player-box');
-            document.getElementById('current-playing-title').innerText = name;
-            playerBox.style.display = 'block';
-            document.getElementById('video-target').innerHTML = "";
-            
-            var currentIdx = 0;
-            var useProxy = false;
-
-            function tryNextRoute() {
-                if (currentIdx >= urlArray.length) {
-                    if(!useProxy) {
-                        // If normal route fails, try once again via CORS Proxy Routing
-                        currentIdx = 0;
-                        useProxy = true;
-                        document.getElementById('current-playing-desc').innerText = "Bypassing local blocks, re-connecting via CORS Proxy servers...";
+            function runFallbackLoop() {
+                if (idx >= urls.length) {
+                    if (!proxyActive) {
+                        idx = 0;
+                        proxyActive = true;
                     } else {
-                        document.getElementById('current-playing-desc').innerText = "Error: This channel feed is currently down or Token Expired.";
+                        document.getElementById('player-wrapper').style.display = 'none';
+                        var ph = document.getElementById('placeholder-text');
+                        ph.style.display = 'block';
+                        document.getElementById('display-title').innerText = "Stream Offline";
+                        document.getElementById('display-desc').innerText = "All link routes for this channel are currently unavailable.";
                         return;
                     }
                 }
-                
-                var originalUrl = urlArray[currentIdx];
-                var finalUrl = useProxy ? (corsProxy + originalUrl) : originalUrl;
-                
-                document.getElementById('current-playing-desc').innerText = desc + " (Testing Link Route " + (currentIdx + 1) + "/" + urlArray.length + "...)";
-                
-                initClappr(finalUrl);
 
-                playerInstance.on(Clappr.Events.PLAYER_ERROR, function() {
-                    currentIdx++;
-                    tryNextRoute();
+                var currentUrl = proxyActive ? (proxyServer + urls[idx]) : urls[idx];
+                startClappr(currentUrl);
+
+                player.on(Clappr.Events.PLAYER_ERROR, function() {
+                    idx++;
+                    runFallbackLoop();
                 });
             }
 
-            tryNextRoute();
+            runFallbackLoop();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function playSingleRoute(url, name, desc) {
-            var playerBox = document.getElementById('player-box');
-            document.getElementById('current-playing-title').innerText = name;
-            document.getElementById('current-playing-desc').innerText = desc;
-            playerBox.style.display = 'block';
-            document.getElementById('video-target').innerHTML = "";
-            
-            initClappr(url);
+        function loadSingleStream(url, title, desc) {
+            document.getElementById('placeholder-text').style.display = 'none';
+            document.getElementById('player-wrapper').style.display = 'block';
+            startClappr(url);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function closeStream() {
-            var playerBox = document.getElementById('player-box');
-            document.getElementById('current-playing-title').innerText = "Premium IPTV Dashboard";
-            document.getElementById('current-playing-desc').innerText = "Select a live working channel below.";
-            
-            if (playerInstance && typeof playerInstance.destroy === 'function') { playerInstance.destroy(); }
-            playerInstance = null;
-            document.getElementById('video-target').innerHTML = "";
-            playerBox.style.display = 'none';
+        function stopStream() {
+            if (player && typeof player.destroy === 'function') { player.destroy(); player = null; }
+            document.getElementById('player-wrapper').style.display = 'none';
+            var ph = document.getElementById('placeholder-text');
+            ph.style.display = 'block';
+            document.getElementById('display-title').innerText = "Welcome Vlogger Hub";
+            document.getElementById('display-desc').innerText = "Select an optimized live stream channel below to begin instant high-speed playback.";
         }
     </script>
 </body>
