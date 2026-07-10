@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Till Infinity Play - Premium IPTV</title>
+    <title>Till Infinity Play - Ultra Premium Experience</title>
     
-    <!-- Premium Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=700&family=Plus+Jakarta+Sans:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ultra Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Orbitron:wght@500;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Clappr Video Engine -->
@@ -14,10 +14,10 @@
     
     <style>
         :root {
-            --bg-base: #020617;
-            --bg-surface: #0b1329;
+            --bg-base: #030712;
+            --bg-surface: #0b1529;
             --accent: #ff2a5f;
-            --accent-glow: rgba(255, 42, 95, 0.4);
+            --accent-glow: rgba(255, 42, 95, 0.5);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
         }
@@ -44,41 +44,40 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            background: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
             z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            perspective: 1200px;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            perspective: 1000px;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
         }
 
         .intro-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
             color: #ffffff;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             text-align: center;
-            text-shadow: 0 1px 0 #bbb, 0 3px 0 #999, 0 0 20px var(--accent);
-            animation: intro3DAndro 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            text-shadow: 0 0 10px var(--accent), 0 0 30px var(--accent), 0 0 50px rgba(255,42,95,0.8);
+            animation: intro3DAndro 2.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             opacity: 0;
         }
 
         @keyframes intro3DAndro {
-            0% { transform: translateZ(-600px) rotateX(60deg); opacity: 0; }
-            100% { transform: translateZ(0px) rotateX(0deg); opacity: 1; }
+            0% { transform: translateZ(-500px) rotateY(-45deg); opacity: 0; }
+            100% { transform: translateZ(0px) rotateY(0deg); opacity: 1; }
         }
 
-        /* HEADER */
+        /* HEADER & GORGEOUS LOGO */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 4%;
-            background: rgba(2, 6, 23, 0.9);
+            padding: 12px 4%;
+            background: rgba(3, 7, 18, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             position: fixed;
@@ -86,21 +85,130 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .menu-trigger {
+            font-size: 1.3rem;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 5px;
         }
 
         .brand-text {
-            font-family: 'Cinzel', serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1px;
             text-decoration: none;
-            background: linear-gradient(to right, #fff, var(--accent));
+            background: linear-gradient(45deg, #ffffff 10%, #ff7ea0 50%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 42, 95, 0.3);
         }
 
-        /* RESPONSIVE 16:9 PLAYER */
+        /* SIDE MAIN MENU (DRAWER) */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: #070c18;
+            z-index: 2000;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.7);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 25px 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .menu-close {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* Profile & Login Section inside Menu */
+        .profile-box {
+            background: var(--bg-surface);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.03);
+            text-align: center;
+        }
+
+        .profile-box i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .profile-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .btn-auth {
+            display: inline-block;
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+        } .btn-login { background: var(--accent); color: white; }
+          .btn-logout { background: #1e293b; color: #ef4444; display: none; }
+
+        .menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .menu-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.2s;
+        }
+
+        .menu-links a:active, .menu-links a.active {
+            color: var(--accent);
+        }
+
+        /* Menu Overlay background */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.6);
+            z-index: 1999;
+            display: none;
+            backdrop-filter: blur(4px);
+        }
+
+        /* CINEMATIC THEATER PLAYER */
         .hero-theater {
             margin-top: 55px;
             width: 100%;
@@ -109,11 +217,17 @@
             aspect-ratio: 16 / 9;
         }
 
-        .video-box, #player-canvas {
+        .video-box {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            z-index: 10;
             display: none;
         }
+
+        #player-canvas { width: 100%; height: 100%; }
 
         .theater-placeholder {
             position: absolute;
@@ -122,6 +236,14 @@
             transform: translate(-50%, -50%);
             text-align: center;
             width: 90%;
+        }
+
+        .theater-placeholder h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 4px;
         }
 
         .btn-close {
@@ -137,26 +259,23 @@
             font-size: 0.7rem;
         }
 
-        /* DROPDOWN & GRID */
-        .dashboard-container {
-            padding: 20px 4%;
-        }
-
-        .filter-row {
+        /* DYNAMIC ANDROID DUAL-GRID */
+        .dashboard-container { padding: 20px 4%; }
+        
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            gap: 8px;
         }
 
-        .custom-dropdown select {
-            background: var(--bg-surface);
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            outline: none;
+        .section-title span {
+            width: 3.5px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
         .media-grid {
@@ -169,13 +288,16 @@
             background: var(--bg-surface);
             border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.01);
+            transition: transform 0.2s;
         }
+
+        .stream-card:active { transform: scale(0.97); }
 
         .card-banner {
             width: 100%;
             aspect-ratio: 16 / 10;
-            background: #1e293b;
+            background: linear-gradient(45deg, #0f172a, #030712);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -186,18 +308,16 @@
             position: absolute;
             top: 6px;
             left: 6px;
-            background: #ef4444;
-            color: white;
+            background: rgba(239, 68, 68, 0.3);
+            border: 1px solid #ef4444;
+            color: #ef4444;
             font-size: 0.55rem;
             font-weight: 700;
             padding: 1px 5px;
             border-radius: 4px;
         }
 
-        .card-meta {
-            padding: 8px;
-        }
-
+        .card-meta { padding: 8px 10px; }
         .card-headline {
             font-size: 0.8rem;
             font-weight: 700;
@@ -205,58 +325,109 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .card-subtext { color: var(--text-muted); font-size: 0.68rem; }
 
-        /* LOADING STATUS */
-        #status-log {
+        footer {
             text-align: center;
-            color: var(--accent);
-            font-size: 0.85rem;
-            margin: 20px 0;
-            font-weight: 600;
+            padding: 20px 0;
+            color: #334155;
+            font-size: 0.7rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
+    <!-- 3D INTRO PRELOADER -->
     <div id="intro-loader">
         <div class="intro-title">Till Infinity</div>
     </div>
 
+    <!-- MAIN MENU OVERLAY & SIDE CONTAINER -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu(false)"></div>
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <span class="brand-text" style="font-size: 1.1rem;">Till Infinity</span>
+            <i class="fa-solid fa-xmark menu-close" onclick="toggleMenu(false)"></i>
+        </div>
+        
+        <!-- Login / Logout Box -->
+        <div class="profile-box">
+            <i class="fa-solid fa-circle-user" id="userIcon"></i>
+            <div class="profile-name" id="profileName">Guest User</div>
+            <button class="btn-auth btn-login" id="loginBtn" onclick="handleAuth('login')">Login</button>
+            <button class="btn-auth btn-logout" id="logoutBtn" onclick="handleAuth('logout')">Log Out</button>
+        </div>
+
+        <ul class="menu-links">
+            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#" onclick="alert('Premium Features Unlocked!')"><i class="fa-solid fa-crown" style="color: gold;"></i> Ultra Stream</a></li>
+            <li><a href="#" onclick="alert('Settings configured for Android Mobile.')"><i class="fa-solid fa-gear"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- HEADER NAVIGATION -->
     <header>
+        <i class="fa-solid fa-bars-staggered menu-trigger" onclick="toggleMenu(true)"></i>
         <a href="#" class="brand-text">Till Infinity</a>
+        <div style="width: 24px;"></div> <!-- Spacer balance -->
     </header>
 
+    <!-- CINEMATIC RESPONSIVE PLAYER -->
     <section class="hero-theater">
         <div class="video-box" id="theater-shell">
             <button class="btn-close" onclick="shutdownStream()"><i class="fa-solid fa-xmark"></i> Close</button>
             <div id="player-canvas"></div>
         </div>
         <div class="theater-placeholder" id="idle-core">
-            <h3>Cinema Engine</h3>
-            <p style="font-size: 0.75rem; color: var(--text-muted);">চ্যানেল সিলেক্ট করুন, স্ট্রিম অটোমেটিক চালু হবে।</p>
+            <h1>Cinema Engine</h1>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">Select any live feed below to start instant streaming.</p>
         </div>
     </section>
 
+    <!-- ANDROID DUAL GRID MEDIA CORE -->
     <main class="dashboard-container">
-        <div class="filter-row">
-            <h4 style="font-size: 0.95rem;">Live Playlists</h4>
-            <div class="custom-dropdown">
-                <!-- এখানে সিলেক্ট করলেই সেই প্লেলিস্ট পার্স হয়ে যাবে -->
-                <select id="playlist-selector" onchange="loadM3UPlaylist(this.value)">
-                    <option value="https://iptv-org.github.io/iptv/categories/animation.m3u">Animation</option>
-                    <option value="https://iptv-org.github.io/iptv/categories/auto.m3u">Auto & Sports</option>
-                    <option value="https://iptv-org.github.io/iptv/categories/comedy.m3u">Comedy</option>
-                    <option value="https://iptv-org.github.io/iptv/categories/cooking.m3u">Cooking</option>
-                </select>
+        <h2 class="section-title"><span></span>Live Broadcasts</h2>
+
+        <div class="media-grid">
+            <!-- 1. Anonda TV -->
+            <div class="stream-card" onclick="bootMultiStream(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8'], 'Anonda TV')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-tv"></i></div>
+                <div class="card-meta"><div class="card-headline">Anonda TV</div><div class="card-subtext">Bangla Regional</div></div>
+            </div>
+
+            <!-- 2. ATN News -->
+            <div class="stream-card" onclick="bootMultiStream(['https://bozztv.com/rongo/rongo-ATNNews/index.m3u8', 'https://owrcovcrpy.gpcdn.net/bpk-tv/1706/output/1706.m3u8'], 'ATN News')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-newspaper"></i></div>
+                <div class="card-meta"><div class="card-headline">ATN News</div><div class="card-subtext">News • 24 Hours</div></div>
+            </div>
+
+            <!-- 3. Boishakhi TV -->
+            <div class="stream-card" onclick="bootSingleStream('https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-circle-play"></i></div>
+                <div class="card-meta"><div class="card-headline">Boishakhi TV</div><div class="card-subtext">Bangla Entertainment</div></div>
+            </div>
+
+            <!-- 4. Gazi TV -->
+            <div class="stream-card" onclick="bootSingleStream('https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8')">
+                <div class="card-banner"><div class="live-indicator">Live</div><i class="fa-solid fa-baseball"></i></div>
+                <div class="card-meta"><div class="card-headline">Gazi TV (GTV)</div><div class="card-subtext">Sports & Cricket</div></div>
+            </div>
+
+            <!-- 5. Red Bull TV -->
+            <div class="stream-card" onclick="bootSingleStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8')">
+                <div class="card-banner"><div class="live-indicator">Live HD</div><i class="fa-solid fa-bolt" style="color: gold;"></i></div>
+                <div class="card-meta"><div class="card-headline">Red Bull TV</div><div class="card-subtext">Extreme Sports</div></div>
             </div>
         </div>
-
-        <div id="status-log">চ্যানেল লোড হচ্ছে... অনুগ্রহ করে অপেক্ষা করুন।</div>
-        <div class="media-grid" id="channel-container"></div>
     </main>
+
+    <footer>&copy; 2026 Till Infinity. All Rights Reserved.</footer>
 
     <script>
         var clapprCore = null;
+        var proxyNode = "https://cors-anywhere.herokuapp.com/";
 
         // INTRO CONTROL
         window.addEventListener('DOMContentLoaded', () => {
@@ -264,85 +435,80 @@
                 document.getElementById('intro-loader').style.opacity = '0';
                 document.getElementById('intro-loader').style.visibility = 'hidden';
                 document.body.style.overflowY = 'auto';
-                // ডিফল্ট প্রথম প্লেলিস্ট লোড হবে
-                loadM3UPlaylist(document.getElementById('playlist-selector').value);
-            }, 2500);
+            }, 2600);
         });
 
-        // DYNAMIC M3U PARSER ENGINE
-        async function loadM3UPlaylist(m3uUrl) {
-            const container = document.getElementById('channel-container');
-            const statusLog = document.getElementById('status-log');
-            container.innerHTML = "";
-            statusLog.style.display = "block";
-            statusLog.innerText = "প্লেলিস্ট প্রসেস করা হচ্ছে...";
-
-            try {
-                // CORS ব্লকিং এড়াতে পাবলিক প্রক্সি ব্যবহার করা হয়েছে
-                const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(m3uUrl));
-                if (!response.ok) throw new Error("Network issue");
-                const m3uText = await response.text();
-
-                const lines = m3uText.split('\n');
-                let channels = [];
-                let currentChannel = {};
-
-                // M3U টেক্সট লাইন বাই লাইন রিড করার লুপ
-                for (let i = 0; i < lines.length; i++) {
-                    let line = lines[i].trim();
-                    if (line.startsWith('#EXTINF:')) {
-                        // চ্যানেলের নাম বের করা
-                        let nameMatch = line.split(',');
-                        currentChannel.name = nameMatch[nameMatch.length - 1] || "Unknown Channel";
-                    } else if (line.startsWith('http')) {
-                        // চ্যানেলের লাইভ লিঙ্ক সেট করা
-                        currentChannel.url = line;
-                        channels.push(currentChannel);
-                        currentChannel = {};
-                    }
-                }
-
-                statusLog.style.display = "none";
-
-                // অ্যান্ড্রয়েড গ্রিডে সর্বোচ্চ ৬০টি চ্যানেল রেন্ডার করার লিমিট (যাতে ফোন ল্যাগ না করে)
-                channels.slice(0, 60).forEach(ch => {
-                    const card = document.createElement('div');
-                    card.className = 'stream-card';
-                    card.onclick = () => playLiveStream(ch.url);
-                    card.innerHTML = `
-                        <div class="card-banner"><div class="live-indicator">LIVE</div><i class="fa-solid fa-tv" style="color: rgba(255,255,255,0.2)"></i></div>
-                        <div class="card-meta">
-                            <div class="card-headline">${ch.name}</div>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-
-            } catch (error) {
-                statusLog.innerText = "প্লেলিস্ট লোড ব্যর্থ হয়েছে! আবার চেষ্টা করুন।";
+        // MENU SYSTEM
+        function toggleMenu(open) {
+            const menu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('menuOverlay');
+            if(open) {
+                menu.classList.add('open');
+                overlay.style.display = 'block';
+            } else {
+                menu.classList.remove('open');
+                overlay.style.display = 'none';
             }
         }
 
-        // PLAYER CONTROL
-        function playLiveStream(url) {
-            document.getElementById('idle-core').style.display = 'none';
-            document.getElementById('theater-shell').style.display = 'block';
+        // AUTH ENGINE
+        function handleAuth(type) {
+            const nameField = document.getElementById('profileName');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if(type === 'login') {
+                nameField.innerText = "Till Infinity Member";
+                loginBtn.style.display = "none";
+                logoutBtn.style.display = "block";
+            } else {
+                nameField.innerText = "Guest User";
+                loginBtn.style.display = "block";
+                logoutBtn.style.display = "none";
+            }
+        }
 
-            if (clapprCore) { clapprCore.destroy(); }
-
+        // STREAM CONTROLLERS
+        function mountPlayer(targetUrl) {
+            if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); }
             clapprCore = new Clappr.Player({
-                source: url,
+                source: targetUrl,
                 parentId: "#player-canvas",
                 autoPlay: true,
                 width: '100%',
                 height: '100%'
             });
+        }
+
+        function bootMultiStream(routeArray) {
+            document.getElementById('idle-core').style.display = 'none';
+            document.getElementById('theater-shell').style.display = 'block';
             
+            var currentRouteIdx = 0;
+            var isProxyTriggered = false;
+
+            function processRouteLoop() {
+                if (currentRouteIdx >= routeArray.length) {
+                    if (!isProxyTriggered) { currentRouteIdx = 0; isProxyTriggered = true; } 
+                    else { shutdownStream(); alert('Stream Offline Currently.'); return; }
+                }
+                var activeUrl = isProxyTriggered ? (proxyNode + routeArray[currentRouteIdx]) : routeArray[currentRouteIdx];
+                mountPlayer(activeUrl);
+                clapprCore.on(Clappr.Events.PLAYER_ERROR, function() { currentRouteIdx++; processRouteLoop(); });
+            }
+            processRouteLoop();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function bootSingleStream(url) {
+            document.getElementById('idle-core').style.display = 'none';
+            document.getElementById('theater-shell').style.display = 'block';
+            mountPlayer(url);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function shutdownStream() {
-            if (clapprCore) { clapprCore.destroy(); clapprCore = null; }
+            if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); clapprCore = null; }
             document.getElementById('theater-shell').style.display = 'none';
             document.getElementById('idle-core').style.display = 'block';
         }
