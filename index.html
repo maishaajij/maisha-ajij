@@ -3,306 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Till Infinity Play</title>
-    <!-- Google Fonts & Clappr (Optimized & Fast Load) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Till Infinity Play - Premium IPTV Experience</title>
+    
+    <!-- Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Clappr Video Engine -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
     
     <style>
+        :root {
+            --bg-base: #030712;
+            --bg-surface: #0b1329;
+            --accent: #ff2a5f;
+            --accent-glow: rgba(255, 42, 95, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: #0b0f19;
-            color: #ffffff;
+            background-color: var(--bg-base);
+            color: var(--text-main);
             overflow-x: hidden;
-            padding-bottom: 30px;
+            overflow-y: hidden; /* Dynamic lock for intro */
         }
 
-        /* Professional Header & Menu Bar with Image Logo */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 5%;
-            background: #060913;
+        /* ================= 3D INTRO ANIMATION PRELOADER ================= */
+        #intro-loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .brand-logo {
+            height: 100vh;
+            background: radial-gradient(circle at center, #0d1527 0%, #020617 100%);
+            z-index: 9999;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 12px;
-            font-size: 1.25rem;
+            flex-direction: column;
+            perspective: 1000px;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
+
+        .intro-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            color: #ffffff;
+            letter-spacing: 6px;
             text-transform: uppercase;
+            text-shadow: 
+                0 1px 0 #ccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0,
+                0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15),
+                0 0 30px var(--accent), 0 0 60px var(--accent);
+            animation: intro3D 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            opacity: 0;
+            transform: translateZ(-200px) rotateX(45deg);
         }
 
-        .brand-logo img {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ff2a5f;
-            box-shadow: 0 0 10px rgba(2ff, 42, 95, 0.3);
+        .intro-sub {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeInSub 1.5s ease 1s forwards;
         }
 
-        .nav-menu {
+        @keyframes intro3D {
+            0% { transform: translateZ(-500px) rotateX(70deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateZ(0px) rotateX(0deg); opacity: 1; }
+        }
+
+        @keyframes fadeInSub {
+            to { opacity: 1; }
+        }
+
+        /* ================= PREMIUM HEADER & NAVIGATION ================= */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 6%;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(16px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .brand-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-decoration: none;
+            background: linear-gradient(to right, #fff 40%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 42, 95, 0.2);
+        }
+
+        .nav-links {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
+            align-items: center;
         }
 
-        .nav-menu a {
-            color: #94a3b8;
+        .nav-links a {
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .nav-menu a:hover, .nav-menu a.active {
-            color: #ffffff;
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
         }
 
-        /* Hero Player Section */
-        .player-section {
-            margin-top: 70px;
+        .btn-premium {
+            background: linear-gradient(135deg, #ff2a5f 0%, #b0003a 100%);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        /* ================= CINEMATIC HERO PLAYER ================= */
+        .hero-theater {
+            margin-top: 75px;
             width: 100%;
-            height: 55vh;
-            background: #020617;
+            height: 60vh;
+            background: #000;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: inset 0 -50px 100px var(--bg-base);
         }
 
-        .player-placeholder {
-            text-align: center;
-            max-width: 500px;
-            padding: 20px;
+        .ambient-glow {
+            position: absolute;
+            width: 60%;
+            height: 50%;
+            background: var(--accent);
+            filter: blur(150px);
+            opacity: 0.12;
+            pointer-events: none;
             z-index: 1;
         }
 
-        .player-placeholder h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .theater-placeholder {
+            text-align: center;
+            max-width: 600px;
+            z-index: 2;
+            padding: 20px;
         }
 
-        .player-placeholder p {
-            color: #64748b;
-            font-size: 0.9rem;
+        .theater-placeholder h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
-        .video-container {
+        .theater-placeholder p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .video-box {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
-            z-index: 5;
+            z-index: 10;
             display: none;
+            background: #000;
         }
 
-        #player-target {
+        #player-canvas {
             width: 100%;
             height: 100%;
         }
 
-        .close-btn {
+        .control-panel {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ff2a5f;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
+            top: 25px;
+            right: 25px;
+            z-index: 20;
+        }
+
+        .btn-close {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
             cursor: pointer;
+            backdrop-filter: blur(10px);
             font-weight: 600;
-            z-index: 10;
             font-size: 0.85rem;
+            transition: all 0.2s;
         }
 
-        /* Content Grid */
-        .container {
-            padding: 40px 5%;
+        .btn-close:hover {
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+            border-color: transparent;
         }
 
-        .section-header {
+        /* ================= MODERN MEDIA DASHBOARD ================= */
+        .dashboard-container {
+            padding: 40px 6%;
+        }
+
+        .filter-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            border-left: 3px solid #ff2a5f;
-            padding-left: 10px;
+        .section-headline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .filter-select {
-            background: #111827;
-            color: #94a3b8;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 8px 16px;
-            border-radius: 6px;
+        .section-headline span {
+            width: 4px;
+            height: 22px;
+            background: var(--accent);
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .custom-dropdown select {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 20px;
+            border-radius: 30px;
             outline: none;
             cursor: pointer;
             font-size: 0.85rem;
+            font-weight: 600;
+            transition: border 0.3s;
         }
 
-        .grid {
+        .custom-dropdown select:focus {
+            border-color: var(--accent);
+        }
+
+        /* OTT Style Card Layout */
+        .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .card {
-            background: #111827;
-            border-radius: 12px;
+        .stream-card {
+            background: var(--bg-surface);
+            border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.02);
-            transition: transform 0.2s, border-color 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: #ff2a5f;
+        .stream-card:hover {
+            transform: scale(1.03) translateY(-5px);
+            border-color: rgba(255, 42, 95, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 42, 95, 0.1);
         }
 
-        .thumbnail {
+        .card-banner {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: #1f2937;
+            background: linear-gradient(45deg, #1e1b4b 0%, #030712 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: 600;
-            color: #4b5563;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
+            position: relative;
         }
 
-        .card-body {
-            padding: 15px;
+        .card-banner i {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.15);
+            transition: color 0.3s;
         }
 
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 4px;
+        .stream-card:hover .card-banner i {
+            color: var(--accent);
+            transform: scale(1.1);
         }
 
-        .card-tag {
-            font-size: 0.75rem;
-            color: #64748b;
+        .live-indicator {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .live-indicator::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #ef4444;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.4; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        .card-meta {
+            padding: 20px;
+            background: linear-gradient(to top, var(--bg-surface) 80%, transparent 100%);
+        }
+
+        .card-headline {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .card-subtext {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         footer {
             text-align: center;
-            padding: 30px 0;
-            color: #334155;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            margin-top: 40px;
+            padding: 40px 0;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 60px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Main Navigation Bar with New Image Logo -->
+    <!-- ================= 3D ANIMATION INTRO SCREEN ================= -->
+    <div id="intro-loader">
+        <div class="intro-title">Till Infinity</div>
+        <div class="intro-sub">Premium Network Streaming</div>
+    </div>
+
+    <!-- ================= NAVIGATION BAR ================= -->
     <header>
-        <div class="brand-logo">
-            <img src="https://i.postimg.cc/9FmD1wM6/1000008322.jpg" alt="Logo">
-            Till Infinity Play
-        </div>
-        <ul class="nav-menu">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#" onclick="alert('Premium Features Coming Soon!')">Live TV</a></li>
-            <li><a href="#" onclick="alert('Contact: admin@tillinfinity.com')">Support</a></li>
+        <a href="#" class="brand-text">Till Infinity</a>
+        <ul class="nav-links">
+            <li><a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#" onclick="alert('Live Channels Engine Connected!')"><i class="fa-solid fa-tv"></i> Streams</a></li>
+            <li><a href="#" class="btn-premium"><i class="fa-solid fa-crown"></i> Ultra Fast</a></li>
         </ul>
     </header>
 
-    <!-- Optimized Hero Stream Section -->
-    <section class="player-section">
-        <div class="video-container" id="player-wrapper">
-            <button class="close-btn" onclick="stopStream()">✕ Close</button>
-            <div id="player-target"></div>
+    <!-- ================= THEATER STREAM SECTION ================= -->
+    <section class="hero-theater">
+        <div class="ambient-glow"></div>
+        <div class="video-box" id="theater-shell">
+            <div class="control-panel">
+                <button class="btn-close" onclick="shutdownStream()"><i class="fa-solid fa-xmark"></i> Close Theater</button>
+            </div>
+            <div id="player-canvas"></div>
         </div>
-        <div class="player-placeholder" id="placeholder-text">
-            <h1 id="display-title">Welcome Vlogger Hub</h1>
-            <p id="display-desc">Select an optimized live stream channel below to begin instant high-speed playback.</p>
+        <div class="theater-placeholder" id="idle-core">
+            <h1 id="panel-title">Cinema Network Engine</h1>
+            <p id="panel-desc">Select an authorized ultra-high-speed channel grid below to process and render live feeds instantly.</p>
         </div>
     </section>
 
-    <!-- Main Live Channels Content -->
-    <main class="container">
-        <div class="section-header">
-            <h2 class="section-title">Live Broadcasters</h2>
-            <select class="filter-select" id="genre-filter" onchange="filterGrid()">
-                <option value="all">All Genres</option>
-                <option value="bangla">Bangla TV</option>
-                <option value="sports">Sports</option>
-            </select>
+    <!-- ================= MAIN PLATFORM GRID ================= -->
+    <main class="dashboard-container">
+        <div class="filter-row">
+            <h2 class="section-headline"><span></span>Live Broadcast Feeds</h2>
+            <div class="custom-dropdown">
+                <select id="grid-filter" onchange="runFilterEngine()">
+                    <option value="all">All Genres</option>
+                    <option value="bangla">Bangla Networks</option>
+                    <option value="sports">Sports Systems</option>
+                </select>
+            </div>
         </div>
 
-        <div class="grid">
-            <!-- 1. Anonda TV -->
-            <div class="card" data-genre="bangla" onclick="loadMultiStream(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anonda TV', 'Bangla Regional Entertainment & Live News')">
-                <div class="thumbnail">ANONDA TV</div>
-                <div class="card-body">
-                    <div class="card-title">Anonda TV</div>
-                    <div class="card-tag">Bangla TV • Live</div>
+        <div class="media-grid">
+            <!-- Channel 1: Anonda TV -->
+            <div class="stream-card" data-genre="bangla" onclick="bootMultiStream(['https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8', 'http://103.99.249.139/anandatv/index.m3u8', 'https://tvsen6.aynaott.com/anandatv/index.m3u8', 'https://bozztv.com/rongo/rongo-AnandaTV/index.m3u8'], 'Anonda TV', 'Bangla Regional Entertainment & Real-time Live News Hub')">
+                <div class="card-banner">
+                    <div class="live-indicator">Live Feed</div>
+                    <i class="fa-solid fa-satellite-dish"></i>
+                </div>
+                <div class="card-meta">
+                    <div class="card-headline">Anonda TV</div>
+                    <div class="card-subtext"><span><i class="fa-solid fa-language"></i> Bangla</span> • <span>Multi-Route Ready</span></div>
                 </div>
             </div>
 
-            <!-- 2. Red Bull TV -->
-            <div class="card" data-genre="sports" onclick="loadSingleStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull TV', 'Extreme Sports, Motorsports & Global Racing Events')">
-                <div class="thumbnail" style="color: #ef4444;">RED BULL TV</div>
-                <div class="card-body">
-                    <div class="card-title">Red Bull TV</div>
-                    <div class="card-tag">Sports • 1080p HD</div>
+            <!-- Channel 2: Red Bull TV -->
+            <div class="stream-card" data-genre="sports" onclick="bootSingleStream('https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8', 'Red Bull TV', 'Global Extreme Sports, Action Events & Live Racing Operations')">
+                <div class="card-banner">
+                    <div class="live-indicator">Live HD</div>
+                    <i class="fa-solid fa-bolt" style="color: #ffaa00;"></i>
+                </div>
+                <div class="card-meta">
+                    <div class="card-headline">Red Bull TV</div>
+                    <div class="card-subtext"><span><i class="fa-solid fa-trophy"></i> Sports</span> • <span>1080p Ultra HD</span></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer>&copy; 2026 Till Infinity. Built for High-Speed Performance.</footer>
+    <footer>&copy; 2026 Till Infinity Network. Optimized for Next-Gen Browsers.</footer>
 
     <script>
-        var player = null;
-        var proxyServer = "https://cors-anywhere.herokuapp.com/";
+        var clapprCore = null;
+        var proxyNode = "https://cors-anywhere.herokuapp.com/";
 
-        function filterGrid() {
-            var val = document.getElementById('genre-filter').value;
-            var cards = document.getElementsByClassName('card');
+        // ================= 3D INTRO LOADER TIMING ENGINE =================
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('intro-loader');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                document.body.style.overflowY = 'auto'; // Unlock scroll
+            }, 3200); // 3.2 Seconds Premium Cinema Animation View
+        });
+
+        function runFilterEngine() {
+            var filter = document.getElementById('grid-filter').value;
+            var cards = document.getElementsByClassName('stream-card');
             for (var i = 0; i < cards.length; i++) {
-                var genre = cards[i].getAttribute('data-genre');
-                cards[i].style.display = (val === 'all' || genre === val) ? 'block' : 'none';
+                var itemGenre = cards[i].getAttribute('data-genre');
+                cards[i].style.display = (filter === 'all' || itemGenre === filter) ? 'block' : 'none';
             }
         }
 
-        function startClappr(streamUrl) {
-            if (player && typeof player.destroy === 'function') { player.destroy(); }
+        function mountPlayer(targetUrl) {
+            if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); }
             
-            player = new Clappr.Player({
-                source: streamUrl,
-                parentId: "#player-target",
+            clapprCore = new Clappr.Player({
+                source: targetUrl,
+                parentId: "#player-canvas",
                 baseUrl: 'https://cdn.jsdelivr.net/npm/clappr@latest/dist',
                 autoPlay: true,
                 width: '100%',
@@ -317,55 +508,55 @@
             });
         }
 
-        function loadMultiStream(urls, title, desc) {
-            document.getElementById('placeholder-text').style.display = 'none';
-            document.getElementById('player-wrapper').style.display = 'block';
+        function bootMultiStream(routeArray, title, desc) {
+            document.getElementById('idle-core').style.display = 'none';
+            document.getElementById('theater-shell').style.display = 'block';
             
-            var idx = 0;
-            var proxyActive = false;
+            var currentRouteIdx = 0;
+            var isProxyTriggered = false;
 
-            function runFallbackLoop() {
-                if (idx >= urls.length) {
-                    if (!proxyActive) {
-                        idx = 0;
-                        proxyActive = true;
+            function processRouteLoop() {
+                if (currentRouteIdx >= routeArray.length) {
+                    if (!isProxyTriggered) {
+                        currentRouteIdx = 0;
+                        isProxyTriggered = true;
                     } else {
-                        document.getElementById('player-wrapper').style.display = 'none';
-                        var ph = document.getElementById('placeholder-text');
+                        document.getElementById('theater-shell').style.display = 'none';
+                        var ph = document.getElementById('idle-core');
                         ph.style.display = 'block';
-                        document.getElementById('display-title').innerText = "Stream Offline";
-                        document.getElementById('display-desc').innerText = "All link routes for this channel are currently unavailable.";
+                        document.getElementById('panel-title').innerText = "Stream Offline";
+                        document.getElementById('panel-desc').innerText = "All link nodes for this channel returned error codes. Token Expired.";
                         return;
                     }
                 }
 
-                var currentUrl = proxyActive ? (proxyServer + urls[idx]) : urls[idx];
-                startClappr(currentUrl);
+                var activeUrl = isProxyTriggered ? (proxyNode + routeArray[currentRouteIdx]) : routeArray[currentRouteIdx];
+                mountPlayer(activeUrl);
 
-                player.on(Clappr.Events.PLAYER_ERROR, function() {
-                    idx++;
-                    runFallbackLoop();
+                clapprCore.on(Clappr.Events.PLAYER_ERROR, function() {
+                    currentRouteIdx++;
+                    processRouteLoop();
                 });
             }
 
-            runFallbackLoop();
+            processRouteLoop();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function loadSingleStream(url, title, desc) {
-            document.getElementById('placeholder-text').style.display = 'none';
-            document.getElementById('player-wrapper').style.display = 'block';
-            startClappr(url);
+        function bootSingleStream(url, title, desc) {
+            document.getElementById('idle-core').style.display = 'none';
+            document.getElementById('theater-shell').style.display = 'block';
+            mountPlayer(url);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function stopStream() {
-            if (player && typeof player.destroy === 'function') { player.destroy(); player = null; }
-            document.getElementById('player-wrapper').style.display = 'none';
-            var ph = document.getElementById('placeholder-text');
+        function shutdownStream() {
+            if (clapprCore && typeof clapprCore.destroy === 'function') { clapprCore.destroy(); clapprCore = null; }
+            document.getElementById('theater-shell').style.display = 'none';
+            var ph = document.getElementById('idle-core');
             ph.style.display = 'block';
-            document.getElementById('display-title').innerText = "Welcome Vlogger Hub";
-            document.getElementById('display-desc').innerText = "Select an optimized live stream channel below to begin instant high-speed playback.";
+            document.getElementById('panel-title').innerText = "Cinema Network Engine";
+            document.getElementById('panel-desc').innerText = "Select an authorized ultra-high-speed channel grid below to process and render live feeds instantly.";
         }
     </script>
 </body>
